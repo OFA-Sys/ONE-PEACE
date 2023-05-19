@@ -15,6 +15,10 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 <img src="assets/one_peace.png" width=100%>
 </p>
 
+## News
+* 2023.5.19: Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
+<br></br>
+
 ## Emergent Zero-shot Retrieval
 
 ### Audio-to-Image
@@ -25,12 +29,14 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 
 ### Audio+Image-to-Image
 ![a+i2i](assets/audio+img2img.png)
+<br></br>
 
 ## Related Codebase
 * [Fairseq](https://github.com/pytorch/fairseq)
 * [xFormers](https://github.com/facebookresearch/xformers)
 * [FlashAttention](https://github.com/HazyResearch/flash-attention)
 * [Apex](https://github.com/NVIDIA/apex)
+<br></br>
 
 ## Getting Involved
 Feel free to submit Github issues or pull requests. Welcome to contribute to our project!
