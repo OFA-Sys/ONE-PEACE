@@ -1,0 +1,7 @@
+from .audio_text_pretrain_loss import AudioTextPretrainLossCriterion
+from .image_text_pretrain_loss import ImageTextPretrainLossCriterion
+from .classify_loss import ClassifyCriterion
+from .refcoco_loss import RefCOCOCriterion
+from .image_text_retrieval_loss import ImageTextRetrievalCriterion
+from .audio_text_retrieval_loss import AudioTextRetrievalCriterion
+from .hinge_loss import HingeLoss
