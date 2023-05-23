@@ -15,7 +15,7 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/referring-expression-comprehension-on-1)](https://paperswithcode.com/sota/referring-expression-comprehension-on-1?p=one-peace-exploring-one-general)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/visual-question-answering-on-vqa-v2-test-std)](https://paperswithcode.com/sota/visual-question-answering-on-vqa-v2-test-std?p=one-peace-exploring-one-general)
 
-[[`Paper`](https://arxiv.org/abs/2305.11172)] [Demo] [Checkpoints]
+[[`Paper`](https://arxiv.org/abs/2305.11172)] [Demo] [[`Checkpoints`](checkpoints.md)][[`Datasets`](datasets.md)]
 
 ONE-PEACE is a general representation model across vision, audio, and language modalities,
 Without using any vision or language pretrained model for initialization, ONE-PEACE achieves leading results in vision, 
