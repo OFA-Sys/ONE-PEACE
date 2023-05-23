@@ -1,0 +1,121 @@
+
+task:
+  _name: ???
+  data: ???
+  valid_data: ???
+  selected_cols: ???
+  bpe_dir: ../../utils/BPE
+
+  max_src_length: 70
+  patch_image_size: 256
+  max_duration: 15
+
+criterion:
+  _name: ???
+
+optimizer:
+  _name: adjust_adam
+  adam_betas: (0.9,0.999)
+  adam_eps: 1e-08
+  weight_decay: 0.05
+  use_distributed_fused_adam: true
+
+lr_scheduler:
+  _name: adjust_cosine
+  warmup_ratio: 0.1
+  min_lr: 1e-6
+
+optimization:
+  max_epoch: ???
+  lr: ???
+  update_freq: ???
+  clip_norm: 0.0
+
+dataset:
+  num_workers: 6
+  batch_size: ???
+  fixed_validation_seed: 3407
+  validate_interval: 1
+
+common:
+  bf16: true
+  memory_efficient_bf16: true
+  no_bias_decay: true
+  log_format: simple
+  log_interval: 10
+  user_dir: ../../user_module
+  disable_iterator_cache: true
+  seed: 3407
+
+checkpoint:
+  restore_file: ../../checkpoints/one-peace.pt
+  keep_last_epochs: 3
+  save_interval: 1
+  best_checkpoint_metric: ???
+  maximize_best_checkpoint_metric: true
+  no_save_optimizer_state: true
+
+  reset_optimizer: true
+  reset_dataloader: true
+  reset_meters: true
+
+distributed_training:
+  ddp_backend: legacy_ddp
+
+model:
+  _name: ???
+
+  encoder:
+    checkpoint_activations: true
+    text_adapter:
+      bucket_size: 256
+      layernorm_embedding: false
+      add_type_embedding: false
+      shrink_alpha: 1.0
+      dropout: 0.0
+      use_attn_bias: true
+
+    image_adapter:
+      bucket_size: 16
+      rel_bucket_size: 16
+      vision_encoder_type: hmlp
+      layernorm_embedding: false
+      add_type_embedding: false
+      shrink_alpha: 1.0
+      dropout: 0.0
+      use_attn_bias: true
+
+    audio_adapter:
+      feature_embed_dim: 512
+      feature_encoder_spec: '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]'
+      abs_pos_type: conv
+      conv_pos_depth: 5
+      conv_pos_width: 95
+      conv_pos_groups: 16
+      conv_pos_pre_ln: false
+      bucket_size: 512
+      layernorm_embedding: false
+      add_type_embedding: false
+      shrink_alpha: 1.0
+      dropout: 0.0
+      use_attn_bias: true
+
+    embed_dim: 1536
+    ffn_embed_dim: 6144
+    layers: 40
+    attention_heads: 24
+    normalize_before: true
+    learned_pos: true
+    drop_path_rate: 0.5
+    use_text_moe: true
+    use_image_moe: true
+    use_audio_moe: true
+    attention_dropout: 0.0
+    dropout: 0.0
+    activation_fn: gelu
+    magneto_scale_attn: true
+    scale_attn: false
+    scale_fc: true
+    scale_heads: false
+    use_layer_scale: true
+    layer_scale_init_value: 1e-6

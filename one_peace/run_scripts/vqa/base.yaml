@@ -1,0 +1,42 @@
+
+default_yaml: ../finetune_3B.yaml
+
+task:
+  _name: vqa
+  data: ../../dataset/vqa/vqav2_vg_train.tsv
+  valid_data: ../../dataset/vqa/vqav2_rest_val.tsv
+  selected_cols: uniq_id,image,question,refs
+  patch_image_size: 256
+
+  head_type: vl
+  num_classes: 3129
+
+criterion:
+  _name: classify_criterion
+  use_multi_label: true
+
+optimization:
+  max_epoch: 10
+  lr: [3e-4]
+  update_freq: [2]
+
+lr_scheduler:
+  _name: adjust_cosine
+  warmup_ratio: 0.1
+
+dataset:
+  batch_size: 8
+  validate_interval_updates: 5
+
+common:
+  layer_decay: 0.85
+
+checkpoint:
+  best_checkpoint_metric: accuracy
+
+model:
+  _name: one_peace_classify
+  head_scale_ratio: 2
+  use_pooler: true
+  pooler_dropout: 0.0
+  attn_pooling: true
