@@ -370,7 +370,7 @@ class OnePieceViT(nn.Module):
       bucket_size: int = 16,
       dropout: float = 0.0,
       drop_path_rate: float = 0.0,
-      embed_dim: Optional[int] = 1536,
+      embed_dim: int = 1536,
       ffn_embed_dim: int = 6144,
       global_pool: bool = True,
       init_scale: float = 0.001,
@@ -422,9 +422,6 @@ class OnePieceViT(nn.Module):
             'image_adapter.pos_embed',
             'image_adapter.cls_embedding',
         }
-
-    def get_num_layers(self):
-        return len(self.encoder.layers)
 
     def forward_features(self, src_images: Tensor):
         image_info = self.image_adapter(src_images)
