@@ -10,9 +10,9 @@ import torch
 
 from fairseq.tasks import register_task
 
-from one_peace.tasks.base_task import BaseTask, BaseTaskConfig
-from one_peace.data.cv_data.image_classify_dataset import ImageClassifyDataset
-from one_peace.metrics import Accuracy
+from tasks.base_task import BaseTask, BaseTaskConfig
+from data.vision_data.image_classify_dataset import ImageClassifyDataset
+from metrics import Accuracy
 
 logger = logging.getLogger(__name__)
 

@@ -4,9 +4,8 @@
 # found in the LICENSE file in the root directory.
 
 import torch
-import soundfile as sf
 
-from one_peace.data.base_dataset import BaseDataset
+from data.base_dataset import BaseDataset
 
 
 class VggsoundDataset(BaseDataset):
@@ -28,7 +27,7 @@ class VggsoundDataset(BaseDataset):
     def __getitem__(self, index):
         uniq_id, audio, text, duration = self.dataset[index]
 
-        wav, curr_sample_rate = sf.read(audio, dtype="float32")
+        wav, curr_sample_rate = self.read_audio(audio)
         feats = torch.tensor(wav)
         feats = self.audio_postprocess(feats, curr_sample_rate, self.max_duration)
         T = self._get_mask_indices_dims(feats.size(-1), self.feature_encoder_spec)

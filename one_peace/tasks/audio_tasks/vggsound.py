@@ -9,9 +9,9 @@ import torch
 
 from fairseq.tasks import register_task
 
-from one_peace.tasks.base_task import BaseTask, BaseTaskConfig
-from one_peace.data.audio_data.vggsound_dataset import VggsoundDataset
-from one_peace.metrics import Accuracy
+from tasks.base_task import BaseTask, BaseTaskConfig
+from data.audio_data.vggsound_dataset import VggsoundDataset
+from metrics import Accuracy
 
 logger = logging.getLogger(__name__)
 

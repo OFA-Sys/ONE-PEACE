@@ -19,9 +19,9 @@ from fairseq.models import register_model
 from fairseq.distributed import fsdp_wrap
 from fairseq.modules.checkpoint_activations import checkpoint_wrapper
 
-from one_peace.models.unify_model_config import UnifyModelConfig
-from one_peace.models.components import Linear
-from one_peace.models.one_peace.one_peace_base import ModelWrapper, OnePeaceBaseModel, init_one_peace_params
+from models.unify_model_config import UnifyModelConfig
+from models.components import Linear
+from models.one_peace.one_peace_base import ModelWrapper, OnePeaceBaseModel, init_one_peace_params
 
 logger = logging.getLogger(__name__)
 

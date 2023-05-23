@@ -14,7 +14,7 @@ def get_distributed_fused_adam_class():
         from apex.contrib.optimizers.distributed_fused_adam import DistributedFusedAdam as DistributedFusedAdam_
         return DistributedFusedAdam
     except ImportError:
-        pass
+        logger.info('import DistributedFusedAdam fail, please install apex')
     return None
 
 try:

@@ -604,6 +604,12 @@ class DatasetConfig(FairseqDataclass):
         },
     )
 
+    ensure_equal_batch: bool = field(
+        default=False,
+        metadata={
+            "help": "",
+        },
+    )
     persistent_workers: bool = field(
         default=False,
         metadata={

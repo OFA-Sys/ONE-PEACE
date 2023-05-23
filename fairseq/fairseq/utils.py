@@ -354,7 +354,7 @@ def clip_grad_norm_(params, max_norm, aggregate_norm_fn=None) -> torch.Tensor:
         params = [params]
     params = list(params)
     grads = [
-        p.grad.detach().float() for p in params if grad_exists(p) and not hasattr(p, "expert")
+        p.grad.detach() for p in params if grad_exists(p) and not hasattr(p, "expert")
     ]
     expert_grads = [
         p.grad.detach() for p in params if grad_exists(p) and hasattr(p, "expert")
@@ -369,7 +369,7 @@ def clip_grad_norm_(params, max_norm, aggregate_norm_fn=None) -> torch.Tensor:
     if len(grads) == 1:
         total_norm = torch.norm(grads[0], p=2, dtype=torch.float32)
     else:
-        if multi_tensor_l2norm_available and grads[0].dtype != torch.bfloat16:
+        if multi_tensor_l2norm_available:
             total_norm = multi_tensor_total_norm(grads)
         else:
             if torch.cuda.is_available():

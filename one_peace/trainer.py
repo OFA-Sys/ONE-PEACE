@@ -25,9 +25,9 @@ from fairseq.logging import meters, metrics
 from fairseq.nan_detector import NanDetector
 from fairseq.optim import lr_scheduler
 
-from one_peace.utils.layer_decay import LayerDecayValueAssigner, get_parameter_groups
-from one_peace.utils.ema_module import EMAModule
-from one_peace.optim import FP16Optimizer, MemoryEfficientFP16Optimizer, AMPOptimizer
+from utils.layer_decay import LayerDecayValueAssigner, get_parameter_groups
+from utils.ema_module import EMAModule
+from optim import FP16Optimizer, MemoryEfficientFP16Optimizer, AMPOptimizer
 
 logger = logging.getLogger(__name__)
 
@@ -506,8 +506,8 @@ class Trainer(object):
                     "Cannot load model parameters from checkpoint {}; "
                     "please ensure that the architectures match.".format(filename)
                 )
-            extra_state = state["extra_state"]
-            self._optim_history = state["optimizer_history"]
+            extra_state = state["extra_state"] if "extra_state" in state else None
+            self._optim_history = state["optimizer_history"] if "optimizer_history" in state else []
 
         if last_optim_state is not None and not reset_optimizer:
             # rebuild optimizer after loading model, since params may have changed

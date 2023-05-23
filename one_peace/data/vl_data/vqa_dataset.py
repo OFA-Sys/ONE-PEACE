@@ -3,13 +3,11 @@
 # This source code is licensed under the Apache 2.0 license
 # found in the LICENSE file in the root directory.
 
-from PIL import Image
-
 import torch
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
 
-from one_peace.data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
+from data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
 
 
 class VqaDataset(BaseDataset):
@@ -19,7 +17,7 @@ class VqaDataset(BaseDataset):
         dataset,
         bpe,
         dictionary,
-        max_src_length=40,
+        max_src_length=70,
         patch_image_size=480,
         answer_cnt=3129
     ):
@@ -41,7 +39,7 @@ class VqaDataset(BaseDataset):
         uniq_id, image, question, refs = self.dataset[index]
         uniq_id = int(uniq_id)
 
-        image = Image.open(image).convert("RGB")
+        image = self.read_image(image)
         patch_image = self.transform(image)
 
         question = self.process_text(question)

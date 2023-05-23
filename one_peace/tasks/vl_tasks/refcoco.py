@@ -9,9 +9,9 @@ import torch
 
 from fairseq.tasks import register_task
 
-from one_peace.tasks.base_task import BaseTask, BaseTaskConfig
-from one_peace.data.vl_data.refcoco_dataset import RefCOCODataset
-from one_peace.metrics import IouAcc
+from tasks.base_task import BaseTask, BaseTaskConfig
+from data.vl_data.refcoco_dataset import RefCOCODataset
+from metrics import IouAcc
 
 logger = logging.getLogger(__name__)
 

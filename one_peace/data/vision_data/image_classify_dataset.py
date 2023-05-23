@@ -3,18 +3,16 @@
 # This source code is licensed under the Apache 2.0 license
 # found in the LICENSE file in the root directory.
 
-from PIL import Image
-
 import torch
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
 from timm.data import create_transform
 from timm.data.mixup import Mixup
 
-from one_peace.data import collate_fn
-from one_peace.data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
-from one_peace.utils.randaugment import RandomAugment
-import one_peace.utils.transforms as utils_transforms
+from data import collate_fn
+from data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
+from utils.randaugment import RandomAugment
+import utils.transforms as utils_transforms
 
 
 class ImageClassifyDataset(BaseDataset):
@@ -96,7 +94,7 @@ class ImageClassifyDataset(BaseDataset):
         assert 0 < int(label) <= 1000
         label_item = torch.LongTensor([int(label) - 1])
 
-        image = Image.open(image).convert("RGB")
+        image = self.read_image(image)
         patch_image = self.transform(image)
 
         example = {

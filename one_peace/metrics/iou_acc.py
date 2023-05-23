@@ -2,7 +2,7 @@ import torch
 import torch.distributed as dist
 
 from .base_metric import BaseMetric
-from one_peace.utils.data_utils import all_gather
+from utils.data_utils import all_gather
 
 
 class IouAcc(BaseMetric):
@@ -34,7 +34,7 @@ class IouAcc(BaseMetric):
         self.ids = torch.cat([self.ids, ids], dim=0)
         self.hyps = torch.cat([self.hyps, hyps], dim=0)
 
-    def merge_results(self):
+    def merge_results(self, output_predict=False):
         if dist.is_initialized():
             dist.all_reduce(self.score_sum, op=dist.ReduceOp.SUM)
             dist.all_reduce(self.score_cnt, op=dist.ReduceOp.SUM)
@@ -45,12 +45,15 @@ class IouAcc(BaseMetric):
             hyps = self.hyps
         score_sum = self.score_sum.item()
         score_cnt = self.score_cnt.item()
-        refcoco_result = []
-        for id, hyp in zip(ids.tolist(), hyps.tolist()):
-            refcoco_result.append((id, hyp))
+
+        predict_results = {}
+        if output_predict:
+            for id, hyp in zip(ids.cpu().tolist(), hyps):
+                predict_results[id] = hyp
+
         return {
             'iou_acc': score_sum / score_cnt,
             'score_sum': score_sum,
             'score_cnt': score_cnt,
-            'refcoco_result': refcoco_result
+            'predict_results': predict_results
         }

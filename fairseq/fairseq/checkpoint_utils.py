@@ -589,14 +589,14 @@ def _torch_persistent_save(obj, f):
 def _upgrade_state_dict(state):
     """Helper for upgrading old model checkpoints."""
 
-    # add optimizer_history
-    if "optimizer_history" not in state:
-        state["optimizer_history"] = [
-            {"criterion_name": "CrossEntropyCriterion", "best_loss": state["best_loss"]}
-        ]
-        state["last_optimizer_state"] = state["optimizer"]
-        del state["optimizer"]
-        del state["best_loss"]
+    # # add optimizer_history
+    # if "optimizer_history" not in state:
+    #     state["optimizer_history"] = [
+    #         {"criterion_name": "CrossEntropyCriterion", "best_loss": state["best_loss"]}
+    #     ]
+    #     state["last_optimizer_state"] = state["optimizer"]
+    #     del state["optimizer"]
+    #     del state["best_loss"]
     # move extra_state into sub-dictionary
     if "epoch" in state and "extra_state" not in state:
         state["extra_state"] = {
@@ -608,24 +608,25 @@ def _upgrade_state_dict(state):
         del state["batch_offset"]
         del state["val_loss"]
     # reduce optimizer history's memory usage (only keep the last state)
-    if "optimizer" in state["optimizer_history"][-1]:
-        state["last_optimizer_state"] = state["optimizer_history"][-1]["optimizer"]
-        for optim_hist in state["optimizer_history"]:
-            del optim_hist["optimizer"]
-    # record the optimizer class name
-    if "optimizer_name" not in state["optimizer_history"][-1]:
-        state["optimizer_history"][-1]["optimizer_name"] = "FairseqNAG"
-    # move best_loss into lr_scheduler_state
-    if "lr_scheduler_state" not in state["optimizer_history"][-1]:
-        state["optimizer_history"][-1]["lr_scheduler_state"] = {
-            "best": state["optimizer_history"][-1]["best_loss"]
-        }
-        del state["optimizer_history"][-1]["best_loss"]
-    # keep track of number of updates
-    if "num_updates" not in state["optimizer_history"][-1]:
-        state["optimizer_history"][-1]["num_updates"] = 0
+    if 'optimizer_history' in 'state':
+        if "optimizer" in state["optimizer_history"][-1]:
+            state["last_optimizer_state"] = state["optimizer_history"][-1]["optimizer"]
+            for optim_hist in state["optimizer_history"]:
+                del optim_hist["optimizer"]
+        # record the optimizer class name
+        if "optimizer_name" not in state["optimizer_history"][-1]:
+            state["optimizer_history"][-1]["optimizer_name"] = "FairseqNAG"
+        # move best_loss into lr_scheduler_state
+        if "lr_scheduler_state" not in state["optimizer_history"][-1]:
+            state["optimizer_history"][-1]["lr_scheduler_state"] = {
+                "best": state["optimizer_history"][-1]["best_loss"]
+            }
+            del state["optimizer_history"][-1]["best_loss"]
+        # keep track of number of updates
+        if "num_updates" not in state["optimizer_history"][-1]:
+            state["optimizer_history"][-1]["num_updates"] = 0
     # use stateful training data iterator
-    if "train_iterator" not in state["extra_state"]:
+    if "extra_state" in state and "train_iterator" not in state["extra_state"]:
         state["extra_state"]["train_iterator"] = {
             "epoch": state["extra_state"].get("epoch", 0),
             "iterations_in_epoch": state["extra_state"].get("batch_offset", 0),

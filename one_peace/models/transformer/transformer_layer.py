@@ -12,7 +12,7 @@ from torch import Tensor
 
 from fairseq.modules.fairseq_dropout import FairseqDropout
 
-from one_peace.models.components import Linear, LayerNorm
+from models.components import Linear, LayerNorm
 from .multihead_attention import MultiheadAttention
 
 logger = logging.getLogger(__name__)
@@ -65,6 +65,7 @@ class GeGLU(nn.Module):
         x_linear = self.wi_1(x)
         x = x_gelu * x_linear
         return x
+
 
 @torch.jit.script
 def fused_dropout_res(
@@ -119,16 +120,12 @@ class TransformerEncoderLayer(nn.Module):
         self.dropout_prob = cfg.dropout
         self.drop_path_prob = drop_path_rate
 
-        ln = None
-        if cfg.share_ln:
-            ln = LayerNorm(self.ffn_embed_dim) if cfg.scale_fc else nn.Identity()
-
         if cfg.use_text_moe:
-            self.text_ffn = self.build_ffn(cfg, ln) if not cfg.use_geglu else self.build_geglu_ffn(cfg, ln)
+            self.text_ffn = self.build_geglu_ffn(cfg)
         if cfg.use_image_moe:
-            self.image_ffn = self.build_ffn(cfg, ln) if not cfg.use_geglu else self.build_geglu_ffn(cfg, ln)
+            self.image_ffn = self.build_geglu_ffn(cfg)
         if cfg.use_audio_moe:
-            self.audio_ffn = self.build_ffn(cfg, ln) if not cfg.use_geglu else self.build_geglu_ffn(cfg, ln)
+            self.audio_ffn = self.build_geglu_ffn(cfg)
 
         self.attn_ln = LayerNorm(self.embed_dim) if cfg.scale_attn else None
         self.final_layer_norm = LayerNorm(self.embed_dim)
@@ -149,29 +146,12 @@ class TransformerEncoderLayer(nn.Module):
             magneto_scale_attn=cfg.magneto_scale_attn
         )
 
-    def build_ffn(self, cfg, ln=None):
-        if ln is None:
-            ln = LayerNorm(self.ffn_embed_dim) if cfg.scale_fc else nn.Identity()
-
-        return nn.Sequential(
-            *[
-                Linear(self.embed_dim, self.ffn_embed_dim),
-                nn.GELU(),
-                self.activation_dropout_module,
-                ln,
-                Linear(self.ffn_embed_dim, self.embed_dim)
-            ]
-        )
-
-    def build_geglu_ffn(self, cfg, ln=None):
-        if ln is None:
-            ln = LayerNorm(self.ffn_embed_dim) if cfg.scale_fc else nn.Identity()
-
+    def build_geglu_ffn(self, cfg):
         return nn.Sequential(
             *[
                 GeGLU(self.embed_dim, self.ffn_embed_dim),
                 self.activation_dropout_module,
-                ln,
+                LayerNorm(self.ffn_embed_dim) if cfg.scale_fc else nn.Identity(),
                 Linear(self.ffn_embed_dim, self.embed_dim)
             ]
         )

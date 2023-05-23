@@ -6,10 +6,9 @@
 import math
 
 import torch
-import soundfile as sf
 
-from one_peace.data.base_dataset import BaseDataset
-from one_peace.utils.data_utils import get_whole_word_mask, compute_block_mask_1d
+from data.base_dataset import BaseDataset
+from utils.data_utils import get_whole_word_mask, compute_block_mask_1d
 
 
 class AudioTextPretrainDataset(BaseDataset):
@@ -53,12 +52,12 @@ class AudioTextPretrainDataset(BaseDataset):
         text_src_item = torch.cat([text_src_item, torch.LongTensor([self.eos])])
 
         if audio is not None:
-            wav, curr_sample_rate = sf.read(audio, dtype="float32")
+            wav, curr_sample_rate = self.read_audio(audio)
             feats = torch.tensor(wav)
         else:
             feats = torch.randn(16000)
             curr_sample_rate = 16000
-        feats = self.postprocess(feats, curr_sample_rate, self.max_duration)
+        feats = self.audio_postprocess(feats, curr_sample_rate, self.max_duration)
 
         T = self._get_mask_indices_dims(feats.size(-1), self.feature_encoder_spec)
         audio_mask_indices = compute_block_mask_1d(

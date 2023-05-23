@@ -4,13 +4,11 @@
 # found in the LICENSE file in the root directory.
 
 import torch
-import soundfile as sf
 
-from one_peace.data.base_dataset import BaseDataset
-from one_peace.utils.data_utils import audio_postprocess
+from data.base_dataset import BaseDataset
 
 
-class AVQADataset(BaseDataset):
+class AQADataset(BaseDataset):
     def __init__(
         self,
         split,
@@ -29,9 +27,9 @@ class AVQADataset(BaseDataset):
         uniq_id, audio, text, duration = item_tuple
         question, answer1, answer2, answer3, answer4, choice = text.strip().split('&&&')
 
-        wav, curr_sample_rate = sf.read(audio, dtype="float32")
+        wav, curr_sample_rate = self.read_audio(audio)
         feats = torch.tensor(wav)
-        feats = audio_postprocess(feats, curr_sample_rate, self.max_duration)
+        feats = self.audio_postprocess(feats, curr_sample_rate, self.max_duration)
         T = self._get_mask_indices_dims(feats.size(-1), self.feature_encoder_spec)
         audio_padding_mask = torch.zeros(T + 1).bool()
 
