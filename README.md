@@ -34,21 +34,38 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 * 2023.5.19: Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
 <br></br>
 
-## Requirements
-* python 3.7.4
-* pytorch 1.13.1
-* Fairseq
-<br></br>
-
-## Installation
+## Requirements and Installation
+* Python >= 3.7
+* Pytorch >= 1.10.0 (recommend 1.13.1)
+* CUDA Version >= 10.2 (recommend 11.6)
+* Install required packages:
 ```bash
 git clone https://github.com/OFA-Sys/ONE-PEACE
 pip install -r requirements.txt
+```
+* For faster training install [Apex](https://github.com/NVIDIA/apex) library (recommended but not necessary):
+```bash
+git clone https://github.com/NVIDIA/apex
+cd apex && pip install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" --global-option="--distributed_adam" --global-option="--deprecated_fused_adam"
+```
+* Install [Xformers](https://github.com/facebookresearch/xformers) library to use Memory-efficient attention (recommended but not necessary):
+```bash
+conda install xformers -c xformers
+```
+* Install [FlashAttention](https://github.com/HazyResearch/flash-attention) library to use faster LayerNorm (recommended but not necessary):
+```bash
+git clone --recursive https://github.com/HazyResearch/flash-attention
+cd flash-attn && pip install .
+cd csrc/layer_norm && pip install .
 ```
 <br></br>
 
 ## Datasets and Checkpoints
 See [datasets.md](datasets.md) and [checkpoints.md](checkpoints.md).
+<br></br>
+
+## Usage
+The detailed instructions of training and inference are provided in [getting_started.md](one_peace/getting_started.md).
 <br></br>
 
 ## Emergent Zero-shot Retrieval

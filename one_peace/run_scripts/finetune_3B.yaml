@@ -38,8 +38,17 @@ dataset:
   validate_interval: 1
 
 common:
+  # use bf16
+  fp16: false
+  memory_efficient_fp16: false
   bf16: true
   memory_efficient_bf16: true
+  # use fp16
+  #  fp16: true
+  #  memory_efficient_fp16: true
+  #  bf16: false
+  #  memory_efficient_bf16: false
+
   no_bias_decay: true
   log_format: simple
   log_interval: 10
