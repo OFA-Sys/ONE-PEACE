@@ -1,5 +1,7 @@
 # ONE-PEACE: Exploring One General Representation Model Toward Unlimited modalities
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/semantic-segmentation-on-ade20k)](https://paperswithcode.com/sota/semantic-segmentation-on-ade20k?p=one-peace-exploring-one-general)
+
 [[`Paper`](https://arxiv.org/abs/2305.11172)] [Demo] [Checkpoints]
 
 ONE-PEACE is a general representation model across vision, audio, and language modalities,
