@@ -67,7 +67,7 @@ pip install -r requirements.txt
 <br></br>
 
 ## Getting Involved
-Feel free to submit Github issues or pull requests. Welcome to contribute to our project!
+Feel free to submit GitHub issues or pull requests. Welcome to contribute to our project!
 
 To contact us, never hestitate to send an email to `zheluo.wp@alibaba-inc.com` or `saimeng.wsj@alibaba-inc.com`!
 <br></br>
