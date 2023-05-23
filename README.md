@@ -40,11 +40,15 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 * Fairseq
 <br></br>
 
-# Installation
+## Installation
 ```bash
 git clone https://github.com/OFA-Sys/ONE-PEACE
 pip install -r requirements.txt
 ```
+<br></br>
+
+## Datasets and Checkpoints
+See [datasets.md](datasets.md) and [checkpoints.md](checkpoints.md).
 <br></br>
 
 ## Emergent Zero-shot Retrieval
