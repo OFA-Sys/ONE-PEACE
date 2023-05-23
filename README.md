@@ -1,6 +1,19 @@
-# ONE-PEACE: Exploring One General Representation Model Toward Unlimited modalities
+<!---
+Copyright 2023 The OFA-Sys Team. 
+All rights reserved.
+This source code is licensed under the Apache 2.0 license found in the LICENSE file in the root directory.
+-->
 
-[[`Paper`](https://arxiv.org/abs/2305.11172)] [Demo] [[`Checkpoints`](checkpoints.md)][[`Datasets`](datasets.md)]
+
+<p align="center">
+    <br>
+    <img src="assets/logo.png" width="350" />
+    <br>
+<p>
+<p align="center">
+        <a href="https://arxiv.org/abs/2305.11172">Paper</a>&nbsp ｜ &nbspDemo&nbsp | &nbsp<a href="checkpoints.md">Checkpoints</a>&nbsp ｜ &nbsp<a href="datasets.md">Datasets</a>
+</p>
+<br>
 
 ONE-PEACE is a general representation model across vision, audio, and language modalities,
 Without using any vision or language pretrained model for initialization, ONE-PEACE achieves leading results in vision, 
@@ -31,11 +44,11 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/visual-question-answering-on-vqa-v2-test-std)](https://paperswithcode.com/sota/visual-question-answering-on-vqa-v2-test-std?p=one-peace-exploring-one-general)
 <br></br>
 
-## News
+# News
 * 2023.5.19: Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
 <br></br>
 
-## Requirements and Installation
+# Requirements and Installation
 * Python >= 3.7
 * Pytorch >= 1.10.0 (recommend 1.13.1)
 * CUDA Version >= 10.2 (recommend 11.6)
@@ -59,42 +72,42 @@ git clone --recursive https://github.com/HazyResearch/flash-attention
 cd flash-attn && pip install .
 cd csrc/layer_norm && pip install .
 ```
-<br></br>
+<br>
 
-## Datasets and Checkpoints
+# Datasets and Checkpoints
 See [datasets.md](datasets.md) and [checkpoints.md](checkpoints.md).
 <br></br>
 
-## Usage
+# Usage
 The detailed instructions of training and inference are provided in [getting_started](one_peace/README.md).
 <br></br>
 
-## Emergent Zero-shot Retrieval
+# Emergent Zero-shot Retrieval
 
-### Audio-to-Image
+## Audio-to-Image
 ![a2i](assets/audio2img.png)
 
-### Audio+Text-to-Image
+## Audio+Text-to-Image
 ![a+t2i](assets/audio+text2img.png)
 
-### Audio+Image-to-Image
+## Audio+Image-to-Image
 ![a+i2i](assets/audio+img2img.png)
 <br></br>
 
-## Related Codebase
+# Related Codebase
 * [Fairseq](https://github.com/pytorch/fairseq)
 * [xFormers](https://github.com/facebookresearch/xformers)
 * [FlashAttention](https://github.com/HazyResearch/flash-attention)
 * [Apex](https://github.com/NVIDIA/apex)
 <br></br>
 
-## Getting Involved
+# Getting Involved
 Feel free to submit Github issues or pull requests. Welcome to contribute to our project!
 
 To contact us, never hestitate to send an email to `zheluo.wp@alibaba-inc.com` or `saimeng.wsj@alibaba-inc.com`!
 <br></br>
 
-### Citation
+# Citation
 
 If you find our paper and code useful in your research, please consider giving a star :star: and citation :pencil: :)
 
