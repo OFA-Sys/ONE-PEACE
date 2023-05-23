@@ -34,6 +34,19 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 * 2023.5.19: Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
 <br></br>
 
+## Requirements
+* python 3.7.4
+* pytorch 1.13.1
+* Fairseq
+<br></br>
+
+# Installation
+```bash
+git clone https://github.com/OFA-Sys/ONE-PEACE
+pip install -r requirements.txt
+```
+<br></br>
+
 ## Emergent Zero-shot Retrieval
 
 ### Audio-to-Image
