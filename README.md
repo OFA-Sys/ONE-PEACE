@@ -156,15 +156,16 @@ See [datasets.md](datasets.md) and [checkpoints.md](checkpoints.md).
 The detailed instructions of training and inference are provided in [getting_started](one_peace/README.md).
 <br></br>
 
-# Emergent Zero-shot Retrieval
+# Gallery
 
-## Audio-to-Image
+## Visual Grounding (unseen domain)
+![grounding](assets/grounding.png)
+
+## Emergent Zero-shot Retrieval
 ![a2i](assets/audio2img.png)
 
-## Audio+Text-to-Image
 ![a+t2i](assets/audio+text2img.png)
 
-## Audio+Image-to-Image
 ![a+i2i](assets/audio+img2img.png)
 <br></br>
 
