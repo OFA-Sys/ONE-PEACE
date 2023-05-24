@@ -24,7 +24,7 @@ lr_scheduler:
   warmup_ratio: 0.1
 
 dataset:
-  batch_size: 1
+  batch_size: 2
   ensure_equal_batch: true
 
 common:

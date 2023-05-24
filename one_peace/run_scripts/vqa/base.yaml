@@ -18,7 +18,7 @@ criterion:
 optimization:
   max_epoch: 10
   lr: [3e-4]
-  update_freq: [2]
+  update_freq: [8]
 
 lr_scheduler:
   _name: adjust_cosine
@@ -26,7 +26,6 @@ lr_scheduler:
 
 dataset:
   batch_size: 8
-  validate_interval_updates: 5
 
 common:
   layer_decay: 0.85
