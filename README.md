@@ -104,7 +104,7 @@ We list the parameters and pretrained checkpoint of ONE-PEACE below.
 ### Vision-Language Tasks
 <table border="1" width="100%">
     <tr align="center">
-        <th>Task</th><th colspan="4">Image-Text Retrieval</th><th colspan="3">Visual Grounding</th><th>Visual Question Answering</th><th>Visural Reasoning</th>
+        <th>Task</th><th colspan="4">Image-Text Retrieval</th><th colspan="3">Visual Grounding</th><th>VQA</th><th>Visual Reasoning</th>
     </tr>
     <tr align="center">
         <td>Dataset</td><td colspan="2">COCO</td><td colspan="2">Flickr30K</td><td>RefCOCO</td><td>RefCOCO+</td><td>RefCOCOg</td><td>VQAv2</td><td>NLVR2</td>
