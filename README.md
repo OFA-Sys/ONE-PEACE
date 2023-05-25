@@ -45,8 +45,9 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 <br></br>
 
 # News
-* 2023.5.23: Released pretrained checkpoint, as well as finetuning & inference scripts for vision-language tasks.
-* 2023.5.19: Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
+* **2023.5.25:** Released the [easy-to-use API](#api), which enables the quick extraction for image, audio and text representations.
+* **2023.5.23:** Released the [pretrained checkpoint](checkpoints.md), as well as [finetuning & inference scripts](one_peace/README.md) for vision-language tasks.
+* **2023.5.19:** Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
 <br></br>
 
 # Models and Results
@@ -153,7 +154,39 @@ See [datasets.md](datasets.md) and [checkpoints.md](checkpoints.md).
 <br></br>
 
 # Usage
-The detailed instructions of training and inference are provided in [getting_started](one_peace/README.md).
+## API
+We provide a simple code snippet to show how to use the API for ONE-PEACE.
+We use ONE-PEACE to compute embeddings for text, images, and audio, as well as their similarities:
+```python
+import torch
+from one_peace.models import from_pretrained
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+# "ONE-PEACE" can also be replaced with ckpt path
+model = from_pretrained("ONE-PEACE", device=device, dtype="float32")
+
+# process raw data
+src_tokens = model.process_text(["cow", "dog", "elephant"])
+src_images = model.process_image(["dog.JPEG", "elephant.JPEG"])
+src_audios, audio_padding_masks = model.process_audio(["cow.flac", "dog.flac"])
+
+with torch.no_grad():
+    # extract normalized features
+    text_features = model.extract_text_features(src_tokens)
+    image_features = model.extract_image_features(src_images)
+    audio_features = model.extract_audio_features(src_audios, audio_padding_masks)
+
+    # compute similarity
+    i2t_similarity = image_features @ text_features.T
+    a2t_similarity = audio_features @ text_features.T
+
+print("Image-to-text similarities:", i2t_similarity)
+print("Audio-to-text similarities:", a2t_similarity)
+```
+
+## Training & Inference
+In addition to the API, we also provide the instructions of training and inference in [getting_started](one_peace/README.md).
+
 <br></br>
 
 # Gallery
