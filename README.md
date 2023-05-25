@@ -190,7 +190,7 @@ If you find our paper and code useful in your research, please consider giving a
 @article{ONEPEACE,
   title={ONE-PEACE: Exploring one general Representation Model toward unlimited modalities},
   author={Wang, Peng and Wang, Shijie and Lin, Junyang and Bai, Shuai and Zhou, Xiaohuan and Zhou, Jingren and Wang, Xinggang and Zhou, Chang},
-  journal={arXiv preprint arXiv:},
+  journal={arXiv preprint arXiv:2305.11172},
   year={2023}
 }
 ```
