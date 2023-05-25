@@ -49,6 +49,79 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 * 2023.5.19: Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
 <br></br>
 
+# Models and Results
+## Model Card
+We list the parameters and pretrained checkpoint of ONE-PEACE below.
+<table border="1" width="100%">
+    <tr align="center">
+        <th>Model</th><th>Ckpt</th><th>Params</th><th>Hidden size</th><th>Intermediate size</th><th>Attention heads</th><th>Layers</th>
+    </tr>
+    <tr align="center">
+        <td>ONE-PEACE</td><td><a href="http://one-peace-shanghai.oss-cn-shanghai.aliyuncs.com/one-peace.pt">Download</a></td><td>4B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
+    </tr>
+</table>
+<br>
+
+## Results
+### Vision Tasks
+<table border="1" width="100%">
+    <tr align="center">
+        <th>Task</th><th>Image classification</th><th>Semantic Segmentation</th><th>Object Detection (w/o Object365)</th><th>Action Recognition</th>
+    </tr>
+    <tr align="center">
+        <td>Dataset</td><td>Imagenet-1K</td><td>ADE20K</td><td>COCO</td><td>Kinetics 400</td>
+    </tr>
+    <tr align="center">
+        <td>Split</td><td>val</td><td>test</td><td>test</td><td>test</td>
+    </tr>
+    <tr align="center">
+        <td>Metric</td><td>Acc.</td><td>mIoU<sup>ss</sup> / mIoU<sup>ms</sup></td><td>AP<sup>box</sup> / AP<sup>mask</sup></td><td>Top-1 Acc. / Top-5 Acc.</td>
+    </tr>
+    <tr align="center">
+        <td>ONE-PEACE</td><td>89.8</td><td>62.0 / 63.0</td><td>60.4 / 52.9</td><td>88.1 / 97.8</td>
+    </tr>
+</table>
+
+### Audio(-language) Tasks
+<table border="1" width="100%">
+    <tr align="center">
+        <th>Task</th><th colspan="4">Audio-Text Retrieval</th><th colspan="3">Audio Classification</th><th>Audio Question Answering</th>
+    </tr>
+    <tr align="center">
+        <td>Dataset</td><td colspan="2">AudioCaps</td><td colspan="2">Clotho</td><td>ESC-50</td><td>FSD50K</td><td>VGGSound (Audio Only)</td><td>AVQA</td>
+    </tr>
+    <tr align="center">
+        <td>Split</td><td colspan="2">test</td><td colspan="2">evaluation</td><td>full</td><td>eval</td><td>test</td><td>val</td>
+    </tr>
+    <tr align="center">
+        <td>Metric</td><td>T2A R@1</td><td>A2T R@1</td><td>T2A R@1</td><td>A2T R@1</td><td>Zero-shot Acc.</td><td>MAP</td><td>Acc.</td><td>Acc.</td>
+    </tr>
+    <tr align="center">
+        <td>ONE-PEACE</td><td>42.5</td><td>51.0</td><td>22.4</td><td>27.1</td><td>91.8</td><td>69.7</td><td>59.6</td><td>86.2</td>
+    </tr>
+</table>
+
+### Vision-Language Tasks
+<table border="1" width="100%">
+    <tr align="center">
+        <th>Task</th><th colspan="4">Image-Text Retrieval</th><th colspan="3">Visual Grounding</th><th>VQA</th><th>Visual Reasoning</th>
+    </tr>
+    <tr align="center">
+        <td>Dataset</td><td colspan="2">COCO</td><td colspan="2">Flickr30K</td><td>RefCOCO</td><td>RefCOCO+</td><td>RefCOCOg</td><td>VQAv2</td><td>NLVR2</td>
+    </tr>
+    <tr align="center">
+        <td>Split</td><td colspan="2">test</td><td colspan="2">test</td><td>val / testA / testB</td><td>val / testA / testB</td><td>val-u / test-u</td><td>test-dev / test-std</td><td>dev / test-P</td>
+    </tr>
+    <tr align="center">
+        <td>Metric</td><td>I2T R@1</td><td>T2I R@1</td><td>I2T R@1</td><td>T2I R@1</td><td colspan="3">Acc@0.5</td><td>Acc.</td><td>Acc.</td>
+    </tr>
+    <tr align="center">
+        <td>ONE-PEACE</td><td>84.1</td><td>65.4</td><td>97.6</td><td>89.6</td><td>92.58 / 94.18 / 89.26</td><td>88.77 / 92.21 / 83.23</td><td>89.22 / 89.27</td><td>82.6 / 82.5</td><td>87.8 / 88.3</td>
+    </tr>
+</table>
+<br></br>
+
+
 # Requirements and Installation
 * Python >= 3.7
 * Pytorch >= 1.10.0 (recommend 1.13.1)
@@ -83,15 +156,16 @@ See [datasets.md](datasets.md) and [checkpoints.md](checkpoints.md).
 The detailed instructions of training and inference are provided in [getting_started](one_peace/README.md).
 <br></br>
 
-# Emergent Zero-shot Retrieval
+# Gallery
 
-## Audio-to-Image
+## Visual Grounding (unseen domain)
+![grounding](assets/grounding.png)
+
+## Emergent Zero-shot Retrieval
 ![a2i](assets/audio2img.png)
 
-## Audio+Text-to-Image
 ![a+t2i](assets/audio+text2img.png)
 
-## Audio+Image-to-Image
 ![a+i2i](assets/audio+img2img.png)
 <br></br>
 
