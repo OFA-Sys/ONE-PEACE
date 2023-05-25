@@ -361,7 +361,7 @@ class TransformerEncoder(nn.Module):
         return x
 
 
-class OnePieceViT(nn.Module):
+class OnePeaceViT(nn.Module):
     def __init__(
       self,
       activation_dropout: float = 0.0,
@@ -440,20 +440,20 @@ class OnePieceViT(nn.Module):
 
 
 def one_piece_g_256(**kwargs):
-    model = OnePieceViT(bucket_size=16, rp_bias=False, shared_rp_bias=True, **kwargs)
+    model = OnePeaceViT(bucket_size=16, rp_bias=False, shared_rp_bias=True, **kwargs)
     return model
 
 
 def one_piece_g_384(**kwargs):
-    model = OnePieceViT(bucket_size=24, rp_bias=False, shared_rp_bias=True, **kwargs)
+    model = OnePeaceViT(bucket_size=24, rp_bias=False, shared_rp_bias=True, **kwargs)
     return model
 
 
 def one_piece_g_448(**kwargs):
-    model = OnePieceViT(bucket_size=28, rp_bias=False, shared_rp_bias=True, **kwargs)
+    model = OnePeaceViT(bucket_size=28, rp_bias=False, shared_rp_bias=True, **kwargs)
     return model
 
 
 def one_piece_g_512(**kwargs):
-    model = OnePieceViT(bucket_size=32, rp_bias=False, shared_rp_bias=True, **kwargs)
+    model = OnePeaceViT(bucket_size=32, rp_bias=False, shared_rp_bias=True, **kwargs)
     return model
