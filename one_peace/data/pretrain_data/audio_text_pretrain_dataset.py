@@ -7,8 +7,8 @@ import math
 
 import torch
 
-from data.base_dataset import BaseDataset
-from utils.data_utils import get_whole_word_mask, compute_block_mask_1d
+from ..base_dataset import BaseDataset
+from ...utils.data_utils import get_whole_word_mask, compute_block_mask_1d
 
 
 class AudioTextPretrainDataset(BaseDataset):

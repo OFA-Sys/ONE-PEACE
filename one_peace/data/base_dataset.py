@@ -15,7 +15,7 @@ from PIL import Image
 
 from fairseq.data import FairseqDataset
 
-from data import collate_fn
+from . import collate_fn
 
 logger = logging.getLogger(__name__)
 warnings.filterwarnings("ignore", "(Possibly )?corrupt EXIF data", UserWarning)

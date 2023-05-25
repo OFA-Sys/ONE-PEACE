@@ -2,7 +2,7 @@ import torch
 import torch.distributed as dist
 
 from .base_metric import BaseMetric
-from utils.data_utils import all_gather
+from ..utils.data_utils import all_gather
 
 
 class Recall(BaseMetric):

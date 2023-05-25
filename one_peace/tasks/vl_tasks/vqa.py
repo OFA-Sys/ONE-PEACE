@@ -9,9 +9,9 @@ import torch
 
 from fairseq.tasks import register_task
 
-from tasks.base_task import BaseTask, BaseTaskConfig
-from data.vl_data.vqa_dataset import VqaDataset
-from metrics import Accuracy
+from ..base_task import BaseTask, BaseTaskConfig
+from ...data.vl_data.vqa_dataset import VqaDataset
+from ...metrics import Accuracy
 
 logger = logging.getLogger(__name__)
 

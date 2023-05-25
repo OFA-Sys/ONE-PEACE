@@ -9,8 +9,8 @@ import torch
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
 
-from data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
-from utils.data_utils import get_whole_word_mask
+from ..base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
+from ...utils.data_utils import get_whole_word_mask
 
 
 class ImageTextPretrainDataset(BaseDataset):

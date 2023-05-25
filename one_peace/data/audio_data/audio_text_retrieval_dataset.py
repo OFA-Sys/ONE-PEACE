@@ -5,7 +5,7 @@
 
 import torch
 
-from data.base_dataset import BaseDataset
+from ..base_dataset import BaseDataset
 
 
 class AudioTextRetrievalDataset(BaseDataset):

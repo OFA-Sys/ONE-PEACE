@@ -21,6 +21,7 @@ from fairseq.dataclass.utils import omegaconf_no_object_check
 from fairseq.dataclass.initialize import add_defaults
 from omegaconf import DictConfig
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",

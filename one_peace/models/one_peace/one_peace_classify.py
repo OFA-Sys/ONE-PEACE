@@ -4,7 +4,7 @@
 # found in the LICENSE file in the root directory.
 
 """
-One-Piece Classify
+ONE-PEACE Classify
 """
 from typing import Optional
 from dataclasses import dataclass, field
@@ -17,8 +17,8 @@ from fairseq.models import register_model
 from fairseq.distributed import fsdp_wrap
 from fairseq.modules.checkpoint_activations import checkpoint_wrapper
 
-from models.unify_model_config import UnifyModelConfig
-from models.one_peace.one_peace_base import ModelWrapper, OnePeaceClassifyHead, OnePeaceBaseModel, init_one_peace_params
+from ..unify_model_config import UnifyModelConfig
+from .one_peace_base import ModelWrapper, OnePeaceClassifyHead, OnePeaceBaseModel, init_one_peace_params
 
 logger = logging.getLogger(__name__)
 

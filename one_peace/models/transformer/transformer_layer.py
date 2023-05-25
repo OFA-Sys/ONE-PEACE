@@ -12,7 +12,7 @@ from torch import Tensor
 
 from fairseq.modules.fairseq_dropout import FairseqDropout
 
-from models.components import Linear, LayerNorm
+from ..components import Linear, LayerNorm
 from .multihead_attention import MultiheadAttention
 
 logger = logging.getLogger(__name__)

@@ -12,7 +12,7 @@ from torch import nn
 from fairseq import utils
 from fairseq.modules.fairseq_dropout import FairseqDropout
 
-from models.components import Linear, LayerNorm
+from ..components import Linear, LayerNorm
 
 logger = logging.getLogger(__name__)
 

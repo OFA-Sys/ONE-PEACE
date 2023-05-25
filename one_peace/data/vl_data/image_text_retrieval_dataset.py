@@ -7,7 +7,7 @@ import torch
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
 
-from data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
+from ..base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
 
 
 class ImageTextRetrievalDataset(BaseDataset):

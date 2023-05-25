@@ -10,7 +10,7 @@ import torch
 from fairseq.modules import FairseqDropout
 from fairseq import utils
 
-from models.components import Embedding, trunc_normal_, LayerNorm
+from ..components import Embedding, trunc_normal_, LayerNorm
 
 logger = logging.getLogger(__name__)
 

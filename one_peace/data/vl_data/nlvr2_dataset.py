@@ -7,9 +7,9 @@ import torch
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
 
-from data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
-from utils.randaugment import RandomAugment
-import utils.transforms as utils_transforms
+from ..base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
+from ...utils.randaugment import RandomAugment
+from ...utils import transforms as utils_transforms
 
 
 class Nlvr2Dataset(BaseDataset):

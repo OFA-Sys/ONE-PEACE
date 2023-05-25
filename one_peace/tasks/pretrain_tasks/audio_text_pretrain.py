@@ -12,9 +12,9 @@ import torch
 from fairseq.tasks import register_task
 from fairseq.utils import move_to_cuda
 
-from tasks.base_task import BaseTask, BaseTaskConfig
-from data.pretrain_data.audio_text_pretrain_dataset import AudioTextPretrainDataset
-from metrics import Recall
+from ..base_task import BaseTask, BaseTaskConfig
+from ...data.pretrain_data.audio_text_pretrain_dataset import AudioTextPretrainDataset
+from ...metrics import Recall
 
 logger = logging.getLogger(__name__)
 

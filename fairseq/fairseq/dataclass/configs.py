@@ -251,7 +251,7 @@ class CommonConfig(FairseqDataclass):
         },
     )
 
-    # for one-piece
+    # for one-peace
     layer_decay: float = field(
         default=1.0,
         metadata={

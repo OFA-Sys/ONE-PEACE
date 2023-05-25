@@ -9,9 +9,9 @@ import torch
 
 from fairseq.tasks import register_task
 
-from tasks.base_task import BaseTask, BaseTaskConfig
-from data.audio_data.audio_classify_dataset import AudioClassifyDataset
-from metrics import MAP
+from ..base_task import BaseTask, BaseTaskConfig
+from ...data.audio_data.audio_classify_dataset import AudioClassifyDataset
+from ...metrics import MAP
 
 logger = logging.getLogger(__name__)
 

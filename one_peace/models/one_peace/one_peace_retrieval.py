@@ -4,7 +4,7 @@
 # found in the LICENSE file in the root directory.
 
 """
-One-Piece Retrieval
+ONE-PEACE Retrieval
 """
 from typing import Optional
 from dataclasses import dataclass
@@ -19,9 +19,9 @@ from fairseq.models import register_model
 from fairseq.distributed import fsdp_wrap
 from fairseq.modules.checkpoint_activations import checkpoint_wrapper
 
-from models.unify_model_config import UnifyModelConfig
-from models.components import Linear
-from models.one_peace.one_peace_base import ModelWrapper, OnePeaceBaseModel, init_one_peace_params
+from ..unify_model_config import UnifyModelConfig
+from ..components import Linear
+from .one_peace_base import ModelWrapper, OnePeaceBaseModel, init_one_peace_params
 
 logger = logging.getLogger(__name__)
 

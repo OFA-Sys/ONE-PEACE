@@ -25,9 +25,9 @@ from fairseq.logging import meters, metrics
 from fairseq.nan_detector import NanDetector
 from fairseq.optim import lr_scheduler
 
-from utils.layer_decay import LayerDecayValueAssigner, get_parameter_groups
-from utils.ema_module import EMAModule
-from optim import FP16Optimizer, MemoryEfficientFP16Optimizer, AMPOptimizer
+from .utils.layer_decay import LayerDecayValueAssigner, get_parameter_groups
+from .utils.ema_module import EMAModule
+from .optim import FP16Optimizer, MemoryEfficientFP16Optimizer, AMPOptimizer
 
 logger = logging.getLogger(__name__)
 

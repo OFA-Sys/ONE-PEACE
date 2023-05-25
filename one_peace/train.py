@@ -14,6 +14,8 @@ import os
 import sys
 from typing import Any, Dict, List, Optional, Tuple
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
 # We need to setup root logger before importing any fairseq libraries.
 logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
@@ -39,7 +41,7 @@ from fairseq.logging import meters, metrics, progress_bar
 from fairseq.model_parallel.megatron_trainer import MegatronTrainer
 # from fairseq.trainer import Trainer
 
-from trainer import Trainer
+from one_peace.trainer import Trainer
 
 
 def main(cfg: FairseqConfig) -> None:

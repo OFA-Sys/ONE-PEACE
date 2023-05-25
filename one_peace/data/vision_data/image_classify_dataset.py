@@ -9,10 +9,10 @@ from torchvision.transforms import InterpolationMode
 from timm.data import create_transform
 from timm.data.mixup import Mixup
 
-from data import collate_fn
-from data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
-from utils.randaugment import RandomAugment
-import utils.transforms as utils_transforms
+from .. import collate_fn
+from ..base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
+from ...utils.randaugment import RandomAugment
+from ...utils import transforms as utils_transforms
 
 
 class ImageClassifyDataset(BaseDataset):

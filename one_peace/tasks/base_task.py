@@ -18,8 +18,8 @@ from fairseq.dataclass import FairseqDataclass, ChoiceEnum
 from fairseq.tasks import FairseqTask, register_task
 from omegaconf import DictConfig
 
-from data.tsv_reader import TSVReader
-from data.iterators import EpochBatchIterator
+from ..data.tsv_reader import TSVReader
+from ..data.iterators import EpochBatchIterator
 
 logger = logging.getLogger(__name__)
 

@@ -13,10 +13,10 @@ import torch.distributed as dist
 from fairseq.tasks import register_task
 from fairseq.utils import move_to_cuda
 
-from tasks.base_task import BaseTask, BaseTaskConfig
-from data.vl_data.image_text_retrieval_dataset import ImageTextRetrievalDataset
-from utils.data_utils import new_islice, all_gather
-from metrics import Recall
+from ..base_task import BaseTask, BaseTaskConfig
+from ...data.vl_data.image_text_retrieval_dataset import ImageTextRetrievalDataset
+from ...utils.data_utils import new_islice, all_gather
+from ...metrics import Recall
 
 logger = logging.getLogger(__name__)
 

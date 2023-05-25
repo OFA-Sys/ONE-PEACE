@@ -6,8 +6,8 @@
 import numpy as np
 import torch
 
-from data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
-import utils.transforms as T
+from ..base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
+from ...utils import transforms as T
 
 
 class RefCOCODataset(BaseDataset):

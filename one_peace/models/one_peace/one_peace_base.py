@@ -4,7 +4,7 @@
 # found in the LICENSE file in the root directory.
 
 """
-One-Piece Base Model Wrapper
+ONE-PEACE Base Model Wrapper
 """
 
 import logging
@@ -16,13 +16,13 @@ import math
 from fairseq.models import register_model, BaseFairseqModel
 from fairseq import utils
 
-from models.unify_model_config import UnifyModelConfig
-from models.components import trunc_normal_
-from models.adapter.text import TextAdapter
-from models.adapter.image import ImageAdapter
-from models.adapter.audio import AudioAdapter
-from models.transformer.transformer_encoder import TransformerEncoder
-from models.components import Linear, LayerNorm
+from ..unify_model_config import UnifyModelConfig
+from ..components import trunc_normal_
+from ..adapter.text import TextAdapter
+from ..adapter.image import ImageAdapter
+from ..adapter.audio import AudioAdapter
+from ..transformer.transformer_encoder import TransformerEncoder
+from ..components import Linear, LayerNorm
 
 logger = logging.getLogger(__name__)
 
