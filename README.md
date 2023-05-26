@@ -67,13 +67,13 @@ We list the parameters and pretrained checkpoint of ONE-PEACE below.
 ### Vision Tasks
 <table border="1" width="100%">
     <tr align="center">
-        <th>Task</th><th>Image classification</th><th>Semantic Segmentation</th><th>Object Detection (w/o Object365)</th><th>Action Recognition</th>
+        <th>Task</th><th>Image classification</th><th>Semantic Segmentation</th><th>Object Detection (w/o Object365)</th><th>Video Action Recognition</th>
     </tr>
     <tr align="center">
         <td>Dataset</td><td>Imagenet-1K</td><td>ADE20K</td><td>COCO</td><td>Kinetics 400</td>
     </tr>
     <tr align="center">
-        <td>Split</td><td>val</td><td>test</td><td>test</td><td>test</td>
+        <td>Split</td><td>val</td><td>val</td><td>val</td><td>val</td>
     </tr>
     <tr align="center">
         <td>Metric</td><td>Acc.</td><td>mIoU<sup>ss</sup> / mIoU<sup>ms</sup></td><td>AP<sup>box</sup> / AP<sup>mask</sup></td><td>Top-1 Acc. / Top-5 Acc.</td>
@@ -89,7 +89,7 @@ We list the parameters and pretrained checkpoint of ONE-PEACE below.
         <th>Task</th><th colspan="4">Audio-Text Retrieval</th><th colspan="3">Audio Classification</th><th>Audio Question Answering</th>
     </tr>
     <tr align="center">
-        <td>Dataset</td><td colspan="2">AudioCaps</td><td colspan="2">Clotho</td><td>ESC-50</td><td>FSD50K</td><td>VGGSound (Audio Only)</td><td>AVQA</td>
+        <td>Dataset</td><td colspan="2">AudioCaps</td><td colspan="2">Clotho</td><td>ESC-50</td><td>FSD50K</td><td>VGGSound (Audio Only)</td><td>AVQA (Audio + Question)</td>
     </tr>
     <tr align="center">
         <td>Split</td><td colspan="2">test</td><td colspan="2">evaluation</td><td>full</td><td>eval</td><td>test</td><td>val</td>
@@ -105,7 +105,7 @@ We list the parameters and pretrained checkpoint of ONE-PEACE below.
 ### Vision-Language Tasks
 <table border="1" width="100%">
     <tr align="center">
-        <th>Task</th><th colspan="4">Image-Text Retrieval</th><th colspan="3">Visual Grounding</th><th>VQA</th><th>Visual Reasoning</th>
+        <th>Task</th><th colspan="4">Image-Text Retrieval (w/o ranking)</th><th colspan="3">Visual Grounding</th><th>VQA</th><th>Visual Reasoning</th>
     </tr>
     <tr align="center">
         <td>Dataset</td><td colspan="2">COCO</td><td colspan="2">Flickr30K</td><td>RefCOCO</td><td>RefCOCO+</td><td>RefCOCOg</td><td>VQAv2</td><td>NLVR2</td>
