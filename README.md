@@ -127,10 +127,16 @@ We list the parameters and pretrained checkpoint of ONE-PEACE below.
 * Python >= 3.7
 * Pytorch >= 1.10.0 (recommend 1.13.1)
 * CUDA Version >= 10.2 (recommend 11.6)
-* Install required packages:
+* Install ONE-PEACE
+```
+python -m pip install git+https://github.com/OFA-Sys/ONE-PEACE.git
+```
+* Or clone the repository locally and install with:
 ```bash
 git clone https://github.com/OFA-Sys/ONE-PEACE
+cd ONE-PEACE
 pip install -r requirements.txt
+python -m pip install -e .
 ```
 * For faster training install [Apex](https://github.com/NVIDIA/apex) library (recommended but not necessary):
 ```bash

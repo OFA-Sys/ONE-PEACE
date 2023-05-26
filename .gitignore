@@ -1,2 +1,19 @@
 .idea/*
 .DS_Store
+
+# compilation and distribution
+__pycache__
+_ext
+*.pyc
+*.pyd
+*.so
+*.dll
+*.egg-info/
+build/
+dist/
+wheels/
+
+# editor settings
+.idea
+.vscode
+_darcs
