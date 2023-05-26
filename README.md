@@ -73,7 +73,7 @@ We list the parameters and pretrained checkpoint of ONE-PEACE below.
         <td>Dataset</td><td>Imagenet-1K</td><td>ADE20K</td><td>COCO</td><td>Kinetics 400</td>
     </tr>
     <tr align="center">
-        <td>Split</td><td>val</td><td>test</td><td>test</td><td>test</td>
+        <td>Split</td><td>val</td><td>val</td><td>val</td><td>val</td>
     </tr>
     <tr align="center">
         <td>Metric</td><td>Acc.</td><td>mIoU<sup>ss</sup> / mIoU<sup>ms</sup></td><td>AP<sup>box</sup> / AP<sup>mask</sup></td><td>Top-1 Acc. / Top-5 Acc.</td>
