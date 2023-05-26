@@ -58,7 +58,7 @@ We list the parameters and pretrained checkpoint of ONE-PEACE below.
         <th>Model</th><th>Ckpt</th><th>Params</th><th>Hidden size</th><th>Intermediate size</th><th>Attention heads</th><th>Layers</th>
     </tr>
     <tr align="center">
-        <td>ONE-PEACE</td><td><a href="http://one-peace-shanghai.oss-cn-shanghai.aliyuncs.com/one-peace.pt">Download</a></td><td>4B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
+        <td>ONE-PEACE</td><td><a href="http://one-peace-shanghai.oss-accelerate.aliyuncs.com/one-peace.pt">Download</a></td><td>4B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
     </tr>
 </table>
 <br>
