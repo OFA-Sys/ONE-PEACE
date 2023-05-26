@@ -44,8 +44,15 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/visual-question-answering-on-vqa-v2-test-std)](https://paperswithcode.com/sota/visual-question-answering-on-vqa-v2-test-std?p=one-peace-exploring-one-general)
 <br></br>
 
+# Online Demo
+We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in Huggingface Spaces. In this demo, you can combine multiple modalities to retrieve related images, such as audio-to-image, audio+text-to-image, audio+image-to-image, and even audio+image+text-to-image.
+
+<p align="center">
+<img src="assets/demo.png" width=100%>
+</p>
+
 # News
-* 🔥 **2023.5.27:** We have provided the multimodal retrieval [demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in huggingface spaces. Have Fun!
+* 🔥 **2023.5.27:** We have provided the [multimodal retrieval demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in huggingface spaces. Have Fun!
 * **2023.5.25:** Released the [easy-to-use API](#api), which enables the quick extraction for image, audio and text representations.
 * **2023.5.23:** Released the [pretrained checkpoint](checkpoints.md), as well as [finetuning & inference scripts](one_peace/README.md) for vision-language tasks.
 * **2023.5.19:** Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
