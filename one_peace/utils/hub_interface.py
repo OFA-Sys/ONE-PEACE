@@ -18,7 +18,7 @@ from .. import tasks
 from .. import models
 
 _MODELS = {
-    "ONE-PEACE": "http://one-peace-shanghai.oss-cn-shanghai.aliyuncs.com/one-peace.pt"
+    "ONE-PEACE": "http://one-peace-shanghai.oss-accelerate.aliyuncs.com/one-peace.pt"
 }
 
 def _download(url: str, root: str):
