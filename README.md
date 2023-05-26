@@ -135,7 +135,6 @@ python -m pip install git+https://github.com/OFA-Sys/ONE-PEACE.git
 ```bash
 git clone https://github.com/OFA-Sys/ONE-PEACE
 cd ONE-PEACE
-pip install -r requirements.txt
 python -m pip install -e .
 ```
 * For faster training install [Apex](https://github.com/NVIDIA/apex) library (recommended but not necessary):
