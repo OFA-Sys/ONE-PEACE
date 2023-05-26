@@ -11,7 +11,7 @@ This source code is licensed under the Apache 2.0 license found in the LICENSE f
     <br>
 <p>
 <p align="center">
-        <a href="https://arxiv.org/abs/2305.11172">Paper</a>&nbsp&nbsp ｜ &nbsp&nbspDemo&nbsp&nbsp | &nbsp&nbsp<a href="checkpoints.md">Checkpoints</a>&nbsp&nbsp ｜ &nbsp&nbsp<a href="datasets.md">Datasets</a>
+        <a href="https://arxiv.org/abs/2305.11172">Paper</a>&nbsp&nbsp ｜ &nbsp&nbsp<a href="https://huggingface.co/spaces/OFA-Sys/ONE-PEACE">Demo</a>&nbsp&nbsp | &nbsp&nbsp<a href="checkpoints.md">Checkpoints</a>&nbsp&nbsp ｜ &nbsp&nbsp<a href="datasets.md">Datasets</a>
 </p>
 <br>
 
@@ -45,6 +45,7 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 <br></br>
 
 # News
+* 🔥 **2023.5.27:** We have provided the multimodal retrieval [demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in huggingface spaces. Have Fun!
 * **2023.5.25:** Released the [easy-to-use API](#api), which enables the quick extraction for image, audio and text representations.
 * **2023.5.23:** Released the [pretrained checkpoint](checkpoints.md), as well as [finetuning & inference scripts](one_peace/README.md) for vision-language tasks.
 * **2023.5.19:** Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
