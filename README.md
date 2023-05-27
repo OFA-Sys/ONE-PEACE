@@ -11,7 +11,7 @@ This source code is licensed under the Apache 2.0 license found in the LICENSE f
     <br>
 <p>
 <p align="center">
-        <a href="https://arxiv.org/abs/2305.11172">Paper</a>&nbsp&nbsp ｜ &nbsp&nbsp<a href="https://huggingface.co/spaces/OFA-Sys/ONE-PEACE">Demo</a>&nbsp&nbsp | &nbsp&nbsp<a href="checkpoints.md">Checkpoints</a>&nbsp&nbsp ｜ &nbsp&nbsp<a href="datasets.md">Datasets</a>
+        <a href="https://arxiv.org/abs/2305.11172">Paper</a>&nbsp&nbsp ｜ &nbsp&nbsp<a href="https://huggingface.co/spaces/OFA-Sys/ONE-PEACE">Demo</a>&nbsp&nbsp | &nbsp&nbsp<a href="checkpoints.md">Checkpoints</a>&nbsp&nbsp ｜ &nbsp&nbsp<a href="datasets.md">Datasets</a>&nbsp&nbsp | &nbsp&nbspBlog
 </p>
 <br>
 
@@ -52,7 +52,7 @@ We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in
 </p>
 
 # News
-* 🔥 **2023.5.27:** We have provided the [multimodal retrieval demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in huggingface spaces. Have Fun!
+* **2023.5.27:** 🔥 We have provided the [multimodal retrieval demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in huggingface spaces. Have Fun!
 * **2023.5.25:** Released the [easy-to-use API](#api), which enables the quick extraction for image, audio and text representations.
 * **2023.5.23:** Released the [pretrained checkpoint](checkpoints.md), as well as [finetuning & inference scripts](one_peace/README.md) for vision-language tasks.
 * **2023.5.19:** Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
@@ -210,11 +210,11 @@ In addition to the API, we also provide the instructions of training and inferen
 ![a+i2i](assets/audio+img2img.png)
 <br></br>
 
-# Related Codebase
-* [Fairseq](https://github.com/pytorch/fairseq)
-* [xFormers](https://github.com/facebookresearch/xformers)
-* [FlashAttention](https://github.com/HazyResearch/flash-attention)
-* [Apex](https://github.com/NVIDIA/apex)
+# Acknowledgement
+* [Fairseq](https://github.com/pytorch/fairseq) A sequence modeling toolkit with flexible configuration and highly extensible code structure.
+* [xFormers](https://github.com/facebookresearch/xformers) A toolbox to accelerate research on Transformers.
+* [FlashAttention](https://github.com/HazyResearch/flash-attention) A repository that provides the official implementation of FlashAttention, which greatly speeds up multi-head attention.
+* [Apex](https://github.com/NVIDIA/apex) A repository that provides useful model acceleration and memory optimization techniques.
 <br></br>
 
 # Getting Involved
