@@ -421,7 +421,7 @@ class TransformerEncoder(nn.Module):
 
 
 @BACKBONES.register_module()
-class OnePieceViT(nn.Module):
+class OnePeaceViT(nn.Module):
     def __init__(
         self,
         activation_dropout: float = 0.0,
@@ -433,9 +433,9 @@ class OnePieceViT(nn.Module):
         num_frames: int = 32,
         dropout: float = 0.1,
         drop_path_rate: float = 0.0,
-        embed_dim: int = 512,
-        ffn_embed_dim: int = 2048,
-        layers: int = 12,
+        embed_dim: int = 1536,
+        ffn_embed_dim: int = 6144,
+        layers: int = 40,
         layer_scale_init_value: float = 1e-2,
         rp_bias: bool = False,
         shared_rp_bias: bool = True,
