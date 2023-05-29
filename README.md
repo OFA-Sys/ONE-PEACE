@@ -52,6 +52,7 @@ We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in
 </p>
 
 # News
+* **2023.5.29:** Released the finetuned checkpoints for vision-language tasks.
 * **2023.5.27:** 🔥 We have provided the [multimodal retrieval demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in huggingface spaces. Have Fun!
 * **2023.5.25:** Released the [easy-to-use API](#api), which enables the quick extraction for image, audio and text representations.
 * **2023.5.23:** Released the [pretrained checkpoint](checkpoints.md), as well as [finetuning & inference scripts](one_peace/README.md) for vision-language tasks.
