@@ -35,3 +35,4 @@ checkpoint:
 
 model:
   _name: one_peace_retrieval
+  copy_rel_pos_table: true
