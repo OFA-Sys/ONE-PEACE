@@ -117,7 +117,7 @@ class OnePeaceClassifyModel(OnePeaceBaseModel):
     ):
         encoder_type = self.head_type
 
-        ft = self.cfg.freeze_finetune_updates <= self.num_updates
+        ft = self.cfg.freeze_finetune_updates <= self.num_updates if hasattr(self, 'num_updates') else True
 
         with torch.no_grad() if not ft else contextlib.ExitStack():
             enc_text_features, enc_image_features, enc_audio_features, \

@@ -48,7 +48,7 @@ class IouAcc(BaseMetric):
 
         predict_results = {}
         if output_predict:
-            for id, hyp in zip(ids.cpu().tolist(), hyps):
+            for id, hyp in zip(ids.cpu().tolist(), hyps.cpu().tolist()):
                 predict_results[id] = hyp
 
         return {

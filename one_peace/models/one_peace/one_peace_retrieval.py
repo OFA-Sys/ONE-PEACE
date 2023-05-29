@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class OnePeaceRetrievalConfig(UnifyModelConfig):
-    pass
+    copy_rel_pos_table: bool = False
 
 
 @register_model("one_peace_retrieval", dataclass=OnePeaceRetrievalConfig)
@@ -55,7 +55,8 @@ class OnePeaceRetrievalModel(OnePeaceBaseModel):
             src_dict,
             use_text_norm=cfg.encoder.use_text_moe,
             use_image_norm=cfg.encoder.use_image_moe,
-            use_audio_norm=cfg.encoder.use_audio_moe
+            use_audio_norm=cfg.encoder.use_audio_moe,
+            num_layers=cfg.encoder.layers if cfg.copy_rel_pos_table else None
         )
         if cfg.encoder.use_text_moe:
             self.text_proj = Linear(embed_dim, embed_dim)
