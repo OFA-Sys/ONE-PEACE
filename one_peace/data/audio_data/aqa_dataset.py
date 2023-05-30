@@ -41,7 +41,7 @@ class AQADataset(BaseDataset):
         src_item += [self.encode_text(' {} answer: {}'.format(question, answer4))]
 
         example = {
-            "id": uniq_id,
+            "id": index,
             "source_text": src_item,
             "source_audio": feats,
             "audio_padding_mask": audio_padding_mask,

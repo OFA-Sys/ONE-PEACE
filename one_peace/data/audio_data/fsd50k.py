@@ -8,7 +8,7 @@ import torch
 from ..base_dataset import BaseDataset
 
 
-class AudioClassifyDataset(BaseDataset):
+class FSD50KDataset(BaseDataset):
     def __init__(
         self,
         split,
@@ -39,7 +39,7 @@ class AudioClassifyDataset(BaseDataset):
         label_item = label_item.unsqueeze(0)
 
         example = {
-            "id": uniq_id,
+            "id": index,
             "source_audio": feats,
             "audio_padding_mask": audio_padding_mask,
             "target": label_item,

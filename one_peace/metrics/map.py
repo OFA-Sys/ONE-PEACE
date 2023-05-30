@@ -16,6 +16,7 @@ class MAP(BaseMetric):
     def initialize(self):
         self.logits = torch.FloatTensor([]).cuda()
         self.targets = torch.FloatTensor([]).cuda()
+        self.ids = torch.LongTensor([]).cuda()
 
     def compute(self, ids, logits, targets):
         self.ids = torch.cat([self.ids, ids], dim=0)

@@ -1,0 +1,38 @@
+
+default_yaml: ../finetune_3B.yaml
+
+task:
+  _name: audio_text_retrieval
+  data: ../../dataset/macs/merge_clotho_audiocaps_macs.tsv
+  valid_data: ../../dataset/audiocaps/audiocaps_val_new.tsv
+  selected_cols: uniq_id,audio,text,duration
+  valid_file: ../../dataset/audiocaps/val_texts.json
+
+  max_duration: 20
+  head_type: al
+
+criterion:
+  _name: audio_text_retrieval_criterion
+  label_smoothing: 0.0
+
+optimization:
+  max_epoch: 10
+  lr: [1.5e-4]
+  update_freq: [1]
+  skip_remainder_batch: false
+
+dataset:
+  batch_size: 2
+  ensure_equal_batch: true
+
+common:
+  layer_decay: 0.95
+
+checkpoint:
+  best_checkpoint_metric: txt_r1
+
+model:
+  _name: one_peace_retrieval
+  copy_rel_pos_table: true
+  encoder:
+    drop_path_rate: 0.9

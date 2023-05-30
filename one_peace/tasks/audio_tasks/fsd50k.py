@@ -10,19 +10,19 @@ import torch
 from fairseq.tasks import register_task
 
 from ..base_task import BaseTask, BaseTaskConfig
-from ...data.audio_data.audio_classify_dataset import AudioClassifyDataset
+from ...data.audio_data.fsd50k import FSD50KDataset
 from ...metrics import MAP
 
 logger = logging.getLogger(__name__)
 
 
 @dataclass
-class AudioClassifyConfig(BaseTaskConfig):
+class FSD50KConfig(BaseTaskConfig):
     pass
 
 
-@register_task("audio_classify", dataclass=AudioClassifyConfig)
-class AudioClassifyTask(BaseTask):
+@register_task("fsd50k", dataclass=FSD50KConfig)
+class FSD50KTask(BaseTask):
     def __init__(self, cfg, dictionary):
         super().__init__(cfg, dictionary)
         self.metric = MAP()
@@ -30,7 +30,7 @@ class AudioClassifyTask(BaseTask):
     def load_dataset(self, split, epoch=1, **kwargs):
         dataset = super().load_dataset(split, epoch, **kwargs)
 
-        self.datasets[split] = AudioClassifyDataset(
+        self.datasets[split] = FSD50KDataset(
             split,
             dataset,
             self.bpe,

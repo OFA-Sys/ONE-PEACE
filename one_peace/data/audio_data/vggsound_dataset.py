@@ -35,7 +35,7 @@ class VggsoundDataset(BaseDataset):
         label_item = torch.LongTensor([int(text.strip())])
 
         example = {
-            "id": uniq_id,
+            "id": index,
             "source_audio": feats,
             "audio_padding_mask": audio_padding_mask,
             "target": label_item,
