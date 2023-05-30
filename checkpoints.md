@@ -8,6 +8,8 @@ We provide links for you to download our checkpoints, including pretrained and f
 ## Vision
 
 ## Audio
+* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_fsd50k.pt"> Finetuned checkpoint for FSD50K </a>
+* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_vggsound.pt"> Finetuned checkpoint for Vggsound </a>
 
 ## Vision-Language
 * <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_coco.pt"> Finetuned checkpoint for COCO Image-Text Retrieval </a>

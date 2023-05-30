@@ -37,7 +37,7 @@ class MAP(BaseMetric):
 
         predict_results = {}
         if output_predict:
-            for id, pred in zip(ids.cpu().tolist(), preds.cpu().tolist()):
+            for id, pred in zip(ids.cpu().tolist(), preds.tolist()):
                 predict_results[id] = pred
 
         return {
