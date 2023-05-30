@@ -94,6 +94,47 @@ cd one_peace/run_scripts/vqa
 bash evaluate.sh
 ```
 
+## Audio-Text Retrieval
+1. Download [AudioCaps](http://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_datasets/audiocaps.zip), [Clotho](https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_datasets/clotho.zip) and [MACS](https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_datasets/macs.zip)
+2. Finetuning
+```bash
+cd one_peace/run_scripts/audio_text_retrieval
+bash finetune.sh
+```
+
+## Audio Question Answering (AQA)
+1. Download [AVQA](https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_datasets/avqa.zip)
+2. Finetuning
+```bash
+cd one_peace/run_scripts/aqa
+bash finetune.sh
+```
+
+## FSD50K
+1. Download [FSD50K](https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_datasets/fsd50K.zip)
+2. Finetuning
+```bash
+cd one_peace/run_scripts/fsd50k
+bash finetune.sh
+```
+3. Inference
+```bash
+cd one_peace/run_scripts/fsd50k
+bash evaluate.sh
+```
+
+## Vggsound
+1. Download [Vggsound](https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_datasets/vggsound.zip)
+2. Finetuning
+```bash
+cd one_peace/run_scripts/vggsound
+bash finetune.sh
+```
+3. Inference
+```bash
+cd one_peace/run_scripts/vggsound
+bash evaluate.sh
+```
 
 
 
