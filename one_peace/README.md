@@ -45,8 +45,10 @@ bash finetune_flickr.sh
 3. Inference
 ```bash
 cd one_peace/run_scripts/image_text_retrieval
-bash zero_shot_evaluate_coco.sh
-bash zero_shot_evaluate_flickr.sh
+bash zero_shot_evaluate_coco.sh  # zero-shot retrieval for COCO
+bash zero_shot_evaluate_flickr.sh  # zero-shot retrieval for Flickr30K
+bash evaluate_coco.sh  # evaluation for COCO
+bash evaluate_flickr.sh  # evaluation for Flickr30K
 ```
 
 ## NLVR2
@@ -55,6 +57,11 @@ bash zero_shot_evaluate_flickr.sh
 ```bash
 cd one_peace/run_scripts/nlvr2
 bash finetune.sh
+```
+3. Inference
+```bash
+cd one_peace/run_scripts/nlvr2
+bash evaluate.sh
 ```
 
 ## Visual Grounding
@@ -66,6 +73,13 @@ bash finetune_refcoco.sh
 bash finetune_refcoco+.sh
 bash finetune_refcocog.sh
 ```
+3. Inference
+```bash
+cd one_peace/run_scripts/visual_grounding
+bash evaluate_refcoco.sh  # evaluation for RefCOCO
+bash evaluate_refcoco+.sh  # evaluation for RefCOCO+
+bash evaluate_refcocog.sh  # evaluation for RefCOCOg
+```
 
 ## VQA
 1. Download [VQAv2](http://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_datasets/vqa.zip)
@@ -74,7 +88,11 @@ bash finetune_refcocog.sh
 cd one_peace/run_scripts/vqa
 bash finetune.sh
 ```
-
+3. Inference
+```bash
+cd one_peace/run_scripts/vqa
+bash evaluate.sh
+```
 
 
 
