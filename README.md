@@ -140,16 +140,16 @@ We also provide the vision, audio and language branches of ONE-PEACE, which can 
 git clone https://github.com/OFA-Sys/ONE-PEACE
 pip install -r requirements.txt
 ```
-* For faster training install [Apex](https://github.com/NVIDIA/apex) library (recommended but not necessary):
+* For faster training install [Apex](https://github.com/NVIDIA/apex) library (optional):
 ```bash
 git clone https://github.com/NVIDIA/apex
 cd apex && pip install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" --global-option="--distributed_adam" --global-option="--deprecated_fused_adam"
 ```
-* Install [Xformers](https://github.com/facebookresearch/xformers) library to use Memory-efficient attention (recommended but not necessary):
+* Install [Xformers](https://github.com/facebookresearch/xformers) library to use Memory-efficient attention (optional):
 ```bash
 conda install xformers -c xformers
 ```
-* Install [FlashAttention](https://github.com/HazyResearch/flash-attention) library to use faster LayerNorm (recommended but not necessary):
+* Install [FlashAttention](https://github.com/HazyResearch/flash-attention) library to use faster LayerNorm (optional):
 ```bash
 git clone --recursive https://github.com/HazyResearch/flash-attention
 cd flash-attn && pip install .
