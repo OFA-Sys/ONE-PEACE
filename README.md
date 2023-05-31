@@ -28,7 +28,7 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 <img src="assets/one_peace.png" width=100%>
 </p>
 
-<br></br>
+<br>
 
 # Online Demo
 We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in Huggingface Spaces. In this demo, you can combine multiple modalities to retrieve related images, such as audio-to-image, audio+text-to-image, audio+image-to-image, and even audio+image+text-to-image.
@@ -36,6 +36,7 @@ We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in
 <p align="center">
 <img src="assets/demo.png" width=100%>
 </p>
+<br>
 
 # News
 * **2023.5.30:** Released the finetuned checkpoints and scripts for audio(-language) tasks.
