@@ -7,7 +7,7 @@ export CUDA_VISIBLE_DEVICES=1,2,3
 export GPUS_PER_NODE=3
 
 config_dir=../../run_scripts
-path=../../checkpoints/one_peace_checkpoints/finetune_vggsound.pt
+path=../../checkpoints/finetune_vggsound.pt
 task_name=vggsound
 model_name=one_peace_classify
 selected_cols=uniq_id,audio,text,duration

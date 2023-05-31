@@ -28,20 +28,6 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 <img src="assets/one_peace.png" width=100%>
 </p>
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/semantic-segmentation-on-ade20k)](https://paperswithcode.com/sota/semantic-segmentation-on-ade20k?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/audio-to-text-retrieval-on-audiocaps)](https://paperswithcode.com/sota/audio-to-text-retrieval-on-audiocaps?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/text-to-audio-retrieval-on-audiocaps)](https://paperswithcode.com/sota/text-to-audio-retrieval-on-audiocaps?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/audio-to-text-retrieval-on-clotho)](https://paperswithcode.com/sota/audio-to-text-retrieval-on-clotho?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/text-to-audio-retrieval-on-clotho)](https://paperswithcode.com/sota/text-to-audio-retrieval-on-clotho?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/image-to-text-retrieval-on-coco)](https://paperswithcode.com/sota/image-to-text-retrieval-on-coco?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/image-to-text-retrieval-on-flickr30k)](https://paperswithcode.com/sota/image-to-text-retrieval-on-flickr30k?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/audio-classification-on-fsd50k)](https://paperswithcode.com/sota/audio-classification-on-fsd50k?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/self-supervised-image-classification-on-1)](https://paperswithcode.com/sota/self-supervised-image-classification-on-1?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/referring-expression-comprehension-on-refcoco-1)](https://paperswithcode.com/sota/referring-expression-comprehension-on-refcoco-1?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/referring-expression-comprehension-on-refcoco)](https://paperswithcode.com/sota/referring-expression-comprehension-on-refcoco?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/referring-expression-comprehension-on)](https://paperswithcode.com/sota/referring-expression-comprehension-on?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/referring-expression-comprehension-on-1)](https://paperswithcode.com/sota/referring-expression-comprehension-on-1?p=one-peace-exploring-one-general)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/one-peace-exploring-one-general/visual-question-answering-on-vqa-v2-test-std)](https://paperswithcode.com/sota/visual-question-answering-on-vqa-v2-test-std?p=one-peace-exploring-one-general)
 <br></br>
 
 # Online Demo
@@ -62,13 +48,24 @@ We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in
 
 # Models and Results
 ## Model Card
-We list the parameters and pretrained checkpoint of ONE-PEACE below.
+We list the parameters and pretrained checkpoints of ONE-PEACE below. Note that ONE-PEACE can be disassembled into different branches to handle different tasks.
+We also provide the vision, audio and language branches of ONE-PEACE, which can be used to perform vision, audio and language tasks respectively.
+
 <table border="1" width="100%">
     <tr align="center">
         <th>Model</th><th>Ckpt</th><th>Params</th><th>Hidden size</th><th>Intermediate size</th><th>Attention heads</th><th>Layers</th>
     </tr>
     <tr align="center">
         <td>ONE-PEACE</td><td><a href="http://one-peace-shanghai.oss-accelerate.aliyuncs.com/one-peace.pt">Download</a></td><td>4B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
+    </tr>
+    <tr align="center">
+        <td>ONE-PEACE<br>(Vision Branch)</td><td><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one_peace_vision.pt">Download</a></td><td>1.5B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
+    </tr>
+    <tr align="center">
+        <td>ONE-PEACE<br>(Audio Branch)</td><td><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one_peace_audio.pt">Download</a></td><td>1.5B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
+    </tr>
+    <tr align="center">
+        <td>ONE-PEACE<br>(Language Branch)</td><td><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one_peace_language.pt">Download</a></td><td>1.6B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
     </tr>
 </table>
 <br>
