@@ -28,7 +28,7 @@ With the scaling-friendly architecture and modality-agnostic tasks, ONE-PEACE ha
 <img src="assets/one_peace.png" width=100%>
 </p>
 
-<br></br>
+<br>
 
 # Online Demo
 We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in Huggingface Spaces. In this demo, you can combine multiple modalities to retrieve related images, such as audio-to-image, audio+text-to-image, audio+image-to-image, and even audio+image+text-to-image.
@@ -36,6 +36,7 @@ We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE) in
 <p align="center">
 <img src="assets/demo.png" width=100%>
 </p>
+<br>
 
 # News
 * **2023.5.30:** Released the finetuned checkpoints and scripts for audio(-language) tasks.
@@ -139,16 +140,16 @@ We also provide the vision, audio and language branches of ONE-PEACE, which can 
 git clone https://github.com/OFA-Sys/ONE-PEACE
 pip install -r requirements.txt
 ```
-* For faster training install [Apex](https://github.com/NVIDIA/apex) library (recommended but not necessary):
+* For faster training install [Apex](https://github.com/NVIDIA/apex) library (optional):
 ```bash
 git clone https://github.com/NVIDIA/apex
 cd apex && pip install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" --global-option="--distributed_adam" --global-option="--deprecated_fused_adam"
 ```
-* Install [Xformers](https://github.com/facebookresearch/xformers) library to use Memory-efficient attention (recommended but not necessary):
+* Install [Xformers](https://github.com/facebookresearch/xformers) library to use Memory-efficient attention (optional):
 ```bash
 conda install xformers -c xformers
 ```
-* Install [FlashAttention](https://github.com/HazyResearch/flash-attention) library to use faster LayerNorm (recommended but not necessary):
+* Install [FlashAttention](https://github.com/HazyResearch/flash-attention) library to use faster LayerNorm (optional):
 ```bash
 git clone --recursive https://github.com/HazyResearch/flash-attention
 cd flash-attn && pip install .
@@ -227,8 +228,8 @@ To contact us, never hestitate to send an email to `zheluo.wp@alibaba-inc.com` o
 If you find our paper and code useful in your research, please consider giving a star :star: and citation :pencil: :)
 
 ```BibTeX
-@article{ONEPEACE,
-  title={ONE-PEACE: Exploring one general Representation Model toward unlimited modalities},
+@article{wang2023one,
+  title={ONE-PEACE: Exploring One General Representation Model Toward Unlimited Modalities},
   author={Wang, Peng and Wang, Shijie and Lin, Junyang and Bai, Shuai and Zhou, Xiaohuan and Zhou, Jingren and Wang, Xinggang and Zhou, Chang},
   journal={arXiv preprint arXiv:2305.11172},
   year={2023}
