@@ -14,6 +14,8 @@ ONE-PEACE can be disassembled into different branches to handle different tasks.
 ## Audio
 * <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_fsd50k.pt"> Finetuned checkpoint for FSD50K </a>
 * <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_vggsound.pt"> Finetuned checkpoint for Vggsound </a>
+* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_al_retrieval.pt"> Finetuned checkpoint for Audio-Language Retrieval (AudioCaps & Clotho) </a>
+* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_aqa.pt"> Finetuned checkpoint for AQA </a>
 
 ## Vision-Language
 * <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_coco.pt"> Finetuned checkpoint for COCO Image-Text Retrieval </a>
