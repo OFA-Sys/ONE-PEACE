@@ -25,6 +25,24 @@ ONE-PEACE/
 ├── datasets.md
 ├── requirements.txt
 ```
+<br>
+
+**Please note that if your device does not support bf16 precision, you can switch to fp16 precision for fine-tuning or inference.**
+```yaml
+common:
+  # # use bf16
+  # fp16: false
+  # memory_efficient_fp16: false
+  # bf16: true
+  # memory_efficient_bf16: true
+
+  # use fp16
+  fp16: true
+  memory_efficient_fp16: true
+  bf16: false
+  memory_efficient_bf16: false
+```
+<br>
 
 ## ESC-50
 1. Download [ESC-50](http://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_datasets/esc50.zip)
@@ -101,6 +119,11 @@ bash evaluate.sh
 cd one_peace/run_scripts/audio_text_retrieval
 bash finetune.sh
 ```
+3. Inference
+```bash
+cd one_peace/run_scripts/audio_text_retrieval
+bash evaluate.sh
+```
 
 ## Audio Question Answering (AQA)
 1. Download [AVQA](https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_datasets/avqa.zip)
@@ -108,6 +131,11 @@ bash finetune.sh
 ```bash
 cd one_peace/run_scripts/aqa
 bash finetune.sh
+```
+3. Inference
+```bash
+cd one_peace/run_scripts/aqa
+bash evaluate.sh
 ```
 
 ## FSD50K
