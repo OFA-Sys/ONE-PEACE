@@ -7,10 +7,12 @@ export CUDA_VISIBLE_DEVICES=1,2,3
 export GPUS_PER_NODE=3
 
 config_dir=./
-config_name=pretrain_vl_3B
-save_dir=../../checkpoints/pretrain/one_peace_vl_3B
+config_name=pretrain_al_3B
+save_dir=../../checkpoints/pretrain/one_peace_al_3B
+restore_file=../../checkpoints/one_peace_stage1.pt  # load stage1 pre-trained ckpt
 
 torchrun --nproc_per_node=${GPUS_PER_NODE} --master_port=${MASTER_PORT} ../../train.py \
     --config-dir=${config_dir} \
     --config-name=${config_name} \
-    checkpoint.save_dir=${save_dir}
+    checkpoint.save_dir=${save_dir} \
+    checkpoint.restore_file=${restore_file}

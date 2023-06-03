@@ -21,7 +21,6 @@ optimization:
 
 dataset:
   batch_size: 8
-  validate_interval_updates: 15
 
 common:
   layer_decay: 0.95
