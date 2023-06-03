@@ -46,7 +46,6 @@ class ImageTextPretrainLossConfig(FairseqDataclass):
     dcl_vl_text_alpha: float=0.5
     dcl_vl_image_alpha: float=0.5
     dcl_logit_scale: float=2.5
-    itc_without_ls: bool=True
 
     label_smoothing: float = field(
         default=0.0,
@@ -64,7 +63,6 @@ class ImageTextPretrainLossCriterion(FairseqCriterion):
         dcl_vl_text_alpha,
         dcl_vl_image_alpha,
         dcl_logit_scale,
-        itc_without_ls,
         label_smoothing=0.0
     ):
         super().__init__(task)
@@ -73,7 +71,6 @@ class ImageTextPretrainLossCriterion(FairseqCriterion):
         self.dcl_vl_text_alpha = dcl_vl_text_alpha
         self.dcl_vl_image_alpha = dcl_vl_image_alpha
         self.dcl_logit_scale = dcl_logit_scale
-        self.itc_without_ls = itc_without_ls
         self.label_smoothing = label_smoothing
 
     def forward(self, model, sample, reduce=True):
@@ -175,12 +172,8 @@ class ImageTextPretrainLossCriterion(FairseqCriterion):
         sim_t2i = logit_scale_exp * text_logits @ image_logits_all.t()
         log_sim_i2t = utils.log_softmax(sim_i2t, dim=-1).type_as(sim_i2t)
         log_sim_t2i = utils.log_softmax(sim_t2i, dim=-1).type_as(sim_t2i)
-        if self.itc_without_ls:
-            i2t_loss = adjust_label_smoothed_nll_loss(log_sim_i2t, targets)
-            t2i_loss = adjust_label_smoothed_nll_loss(log_sim_t2i, targets)
-        else:
-            i2t_loss = adjust_label_smoothed_nll_loss(log_sim_i2t, targets, self.label_smoothing)
-            t2i_loss = adjust_label_smoothed_nll_loss(log_sim_t2i, targets, self.label_smoothing)
+        i2t_loss = adjust_label_smoothed_nll_loss(log_sim_i2t, targets)
+        t2i_loss = adjust_label_smoothed_nll_loss(log_sim_t2i, targets)
         itc_loss = (i2t_loss + t2i_loss) / 2
 
         with torch.no_grad():
@@ -209,7 +202,7 @@ class ImageTextPretrainLossCriterion(FairseqCriterion):
         mask_student_out = F.normalize(student_out[indices].float(), dim=1).to(orig_type)
         teacher_out = F.normalize(teacher_out.float(), dim=1).to(orig_type)
 
-        sim_stu2tea = self.mask_logit_scale * mask_student_out @ teacher_out.t()
+        sim_stu2tea = self.dcl_logit_scale * mask_student_out @ teacher_out.t()
         log_sim_stu2tea = utils.log_softmax(sim_stu2tea, dim=-1).type_as(sim_stu2tea)
         loss = adjust_label_smoothed_nll_loss(log_sim_stu2tea, targets, self.label_smoothing)
         return loss

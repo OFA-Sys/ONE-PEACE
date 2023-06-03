@@ -89,7 +89,7 @@ class AudioTextPretrainTask(BaseTask):
         samples_list = []
         for text in self.texts:
             text = "This is a sound of " + text
-            item_tuple = (0, None, text, 1, None)
+            item_tuple = (0, None, text, 1)
             sample = dataset.__getitem__(0, item_tuple)
             samples_list.append(sample)
         samples = dataset.collater(samples_list)
