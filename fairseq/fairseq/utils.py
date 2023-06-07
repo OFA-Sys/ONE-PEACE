@@ -369,7 +369,7 @@ def clip_grad_norm_(params, max_norm, aggregate_norm_fn=None) -> torch.Tensor:
     if len(grads) == 1:
         total_norm = torch.norm(grads[0], p=2, dtype=torch.float32)
     else:
-        if multi_tensor_l2norm_available:
+        if multi_tensor_l2norm_available and grads[0].dtype != torch.bfloat16:
             total_norm = multi_tensor_total_norm(grads)
         else:
             if torch.cuda.is_available():
