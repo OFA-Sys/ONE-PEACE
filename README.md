@@ -139,6 +139,7 @@ We also provide the vision, audio and language branches of ONE-PEACE, which can 
 * Install required packages:
 ```bash
 git clone https://github.com/OFA-Sys/ONE-PEACE
+cd ONE-PEACE
 pip install -r requirements.txt
 ```
 * For faster training install [Apex](https://github.com/NVIDIA/apex) library (optional):
