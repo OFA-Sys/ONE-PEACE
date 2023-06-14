@@ -17,3 +17,11 @@ wheels/
 .idea
 .vscode
 _darcs
+
+# output dir
+output
+instant_test_output
+inference_test_output
+
+# project dir
+one_peace_vision/det/datasets
