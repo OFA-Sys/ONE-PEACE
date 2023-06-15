@@ -9,9 +9,9 @@ from detectron2.modeling import SimpleFeaturePyramid
 from detectron2.modeling.backbone.fpn import LastLevelMaxPool
 from detectron2.modeling.box_regression import Box2BoxTransform
 from detectron2.modeling.matcher import Matcher
-from detectron2.modeling.roi_heads import CascadeROIHeads, FastRCNNConvFCHead
+from detectron2.modeling.roi_heads import FastRCNNConvFCHead
 
-from models import OnePeace, get_onepeace_lr_decay_rate
+from models import OnePeace, get_onepeace_lr_decay_rate, CustomCascadeROIHeads
 from layers import FastRCNNOutputLayersSoftNms
 from ..common.coco_loader_lsj_1280 import dataloader
 
@@ -62,7 +62,7 @@ model.proposal_generator.head.conv_dims = [-1, -1]
 model.roi_heads.mask_head.conv_norm = "LN"
 
 model.roi_heads.update(
-    _target_=CascadeROIHeads,
+    _target_=CustomCascadeROIHeads,
     box_heads=[
         L(FastRCNNConvFCHead)(
             input_shape=ShapeSpec(channels=256, height=7, width=7),
