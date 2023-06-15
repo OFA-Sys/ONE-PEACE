@@ -1,4 +1,4 @@
-# ONE-PEACE for Object Detection
+# ONE-PEACE for Object Detection & Instance Segmentation
 
 ### Pretrained Models
 <table><tbody>
