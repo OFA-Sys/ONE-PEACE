@@ -2,12 +2,11 @@ _base_ = [
     '../_base_/models/mask2former_onepeace.py',
     '../_base_/datasets/ade20k.py',
     '../_base_/default_runtime.py',
-    '../_base_/schedules/schedule_80k.py'
+    '../_base_/schedules/schedule_40k.py'
 ]
 crop_size = (896, 896)
 pretrained = '/path/to/one-peace.pt'
 model = dict(
-    type='EncoderDecoderMask2FormerAug',
     pretrained=pretrained,
     backbone=dict(
         type='OnePeaceAdapter',
@@ -122,20 +121,18 @@ test_pipeline = [
     dict(
         type='MultiScaleFlipAug',
         img_scale=(3584, 896),
-        img_ratios=[384. / 896., 512. / 896., 640. / 896.,
-                    768. / 896., 896. / 896., 1024. / 896., 1152. / 896.],
-        flip=True,
+        # img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
+        flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
             dict(type='ResizeToMultiple', size_divisor=32),
             dict(type='RandomFlip'),
-            dict(type='PadShortSide', size=896, pad_val=0, seg_pad_val=255),
             dict(type='Normalize', **img_norm_cfg),
             dict(type='ImageToTensor', keys=['img']),
             dict(type='Collect', keys=['img']),
         ])
 ]
-optimizer = dict(_delete_=True, type='AdamW', lr=2e-5, betas=(0.9, 0.999), weight_decay=0.05,
+optimizer = dict(_delete_=True, type='AdamW', lr=1e-5, betas=(0.9, 0.999), weight_decay=0.05,
                  constructor='OnePeaceLearningRateDecayOptimizerConstructor',
                  paramwise_cfg=dict(num_layers=40, decay_rate=0.95))
 lr_config = dict(_delete_=True,
@@ -149,5 +146,5 @@ data = dict(samples_per_gpu=1,
             val=dict(pipeline=test_pipeline),
             test=dict(pipeline=test_pipeline))
 runner = dict(type='IterBasedRunner')
-checkpoint_config = dict(by_epoch=False, interval=8000, max_keep_ckpts=10, create_symlink=False)
-evaluation = dict(interval=8000, metric='mIoU', save_best='mIoU')
+checkpoint_config = dict(by_epoch=False, interval=4000, max_keep_ckpts=10, create_symlink=False)
+evaluation = dict(interval=4000, metric='mIoU', save_best='mIoU')
