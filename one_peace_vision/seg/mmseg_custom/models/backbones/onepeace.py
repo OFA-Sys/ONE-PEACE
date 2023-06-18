@@ -200,8 +200,8 @@ class MultiheadAttention(nn.Module):
 
         self.ln = nn.LayerNorm(embed_dim)
 
-        self.k_proj = nn.Linear(self.kdim, embed_dim, bias=False)
-        self.v_proj = nn.Linear(self.vdim, embed_dim, bias=True)
+        self.k_proj = nn.Linear(embed_dim, embed_dim, bias=False)
+        self.v_proj = nn.Linear(embed_dim, embed_dim, bias=True)
         self.q_proj = nn.Linear(embed_dim, embed_dim, bias=True)
 
         self.out_proj = nn.Linear(embed_dim, embed_dim, bias=True)
