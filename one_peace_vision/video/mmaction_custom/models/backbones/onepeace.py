@@ -308,7 +308,7 @@ class TransformerEncoderLayer(nn.Module):
 
     def build_ffn(self):
         return nn.Sequential(
-            GeGLU(self.embed_dim, self.ffn_embed_dim, False),
+            GeGLU(self.embed_dim, self.ffn_embed_dim),
             self.activation_dropout_module,
             nn.LayerNorm(self.ffn_embed_dim),
             nn.Linear(self.ffn_embed_dim, self.embed_dim)
