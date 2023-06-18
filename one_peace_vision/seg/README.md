@@ -11,7 +11,14 @@
 <th valign="bottom">mIoU (ms)</th>
 <th valign="bottom">download</th>
 <!-- TABLE BODY -->
- <tr><td align="left"><a href="configs/ade20k/mask2former_onepeace_adapter_g_896_80k_ade20k_ss.py">onepeace_seg_ade20k</a></td>
+<tr><td align="left"><a href="configs/coco_stuff164k/mask2former_onepeace_adapter_g_896_80k_cocostuff164k_ss.py">onepeace_seg_cocostuff164k</a></td>
+<td align="center">16</td>
+<td align="center">80k</td>
+<td align="center">52.9</td>
+<td align="center">-</td>
+<td align="center">-</a></td>
+</tr>
+ <tr><td align="left"><a href="configs/ade20k/mask2former_onepeace_adapter_g_896_40k_ade20k_ss.py">onepeace_seg_ade20k</a></td>
 <td align="center">16</td>
 <td align="center">40k</td>
 <td align="center">62.0</td>
