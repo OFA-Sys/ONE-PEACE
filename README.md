@@ -145,7 +145,7 @@ pip install -r requirements.txt
 * For faster training install [Apex](https://github.com/NVIDIA/apex) library (optional):
 ```bash
 git clone https://github.com/NVIDIA/apex
-cd apex && pip install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" --global-option="--distributed_adam" --global-option="--deprecated_fused_adam"
+cd apex && pip install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" --global-option="--distributed_adam" --global-option="--deprecated_fused_adam" ./
 ```
 * Install [Xformers](https://github.com/facebookresearch/xformers) library to use Memory-efficient attention (optional):
 ```bash
