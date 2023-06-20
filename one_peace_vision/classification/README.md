@@ -17,8 +17,8 @@ As a sanity check, run evaluation using our ImageNet **fine-tuned** models:
 <th valign="bottom">ONE-PEACE-512</th>
 <!-- TABLE BODY -->
 <tr><td align="left">fine-tuned checkpoint</td>
-<td align="center">-</a></td>
-<td align="center">-</a></td>
+<td align="center"><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/onepeace_ft_21kto1k_384.pth">model</a></td>
+<td align="center"><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/onepeace_ft_21kto1k_512.pth">model</a></td>
 <tr><td align="left">reference ImageNet accuracy</td>
 <td align="center">89.6</td>
 <td align="center">89.8</td>
