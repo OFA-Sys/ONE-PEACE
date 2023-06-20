@@ -16,7 +16,7 @@
 <td align="center">90k</td>
 <td align="center">60.4</td>
 <td align="center">52.9</td>
-<td align="center">-</a></td>
+<td align="center"><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/onepeace_det_coco.pth">model</a></td>
 </tr>
 </tbody></table>
 
