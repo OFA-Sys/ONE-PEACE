@@ -51,7 +51,7 @@ We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE_Mul
 # Models and Results
 ## Model Card
 We list the parameters and pretrained checkpoints of ONE-PEACE below. Note that ONE-PEACE can be disassembled into different branches to handle different tasks.
-We also provide the vision, audio and language branches of ONE-PEACE, which can be used to perform vision, audio and language tasks respectively.
+We also provide the vision-branch of ONE-PEACE, which can be used to perform vision tasks.
 
 <table border="1" width="100%">
     <tr align="center">
@@ -61,13 +61,7 @@ We also provide the vision, audio and language branches of ONE-PEACE, which can 
         <td>ONE-PEACE</td><td><a href="http://one-peace-shanghai.oss-accelerate.aliyuncs.com/one-peace.pt">Download</a></td><td>4B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
     </tr>
     <tr align="center">
-        <td>ONE-PEACE<br>(Vision Branch)</td><td><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one_peace_vision.pt">Download</a></td><td>1.5B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
-    </tr>
-    <tr align="center">
-        <td>ONE-PEACE<br>(Audio Branch)</td><td><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one_peace_audio.pt">Download</a></td><td>1.5B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
-    </tr>
-    <tr align="center">
-        <td>ONE-PEACE<br>(Language Branch)</td><td><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one_peace_language.pt">Download</a></td><td>1.6B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
+        <td>ONE-PEACE<br>(Vision Branch)</td><td><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one-peace-vision.pkl">Download</a></td><td>1.5B</td><td>1536</td><td>6144</td><td>24</td><td>40</td>
     </tr>
 </table>
 <br>

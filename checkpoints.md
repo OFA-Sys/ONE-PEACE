@@ -3,11 +3,9 @@
 We provide links for you to download our checkpoints, including pretrained and finetuned models on different tasks.
 
 ## Pretraining
-ONE-PEACE can be disassembled into different branches to handle different tasks. In addition to the full model, we also provide the vision, audio and language branches of ONE-PEACE, which can be used to perform vision, audio and language tasks respectively.
+ONE-PEACE can be disassembled into different branches to handle different tasks. In addition to the full model, we also provide the vision-branch of ONE-PEACE, which can be used to perform vision tasks.
 * <a href="http://one-peace-shanghai.oss-accelerate.aliyuncs.com/one-peace.pt"> Pretrained checkpoint </a>
-* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one_peace_vision.pt"> ONE-PEACE Vision Branch </a>
-* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one_peace_audio.pt"> ONE-PEACE Audio Branch </a>
-* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one_peace_language.pt"> ONE-PEACE Language Branch </a>
+* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one-peace-vision.pkl"> ONE-PEACE Vision Branch </a>
 
 ## Vision
 
