@@ -23,7 +23,7 @@
 <td align="center">40k</td>
 <td align="center">62.0</td>
 <td align="center">63.0</td>
-<td align="center">-</a></td>
+<td align="center"><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/onepeace_seg_cocostuff2ade20k.pth">model</a></td>
 </tr>
 </tbody></table>
 
