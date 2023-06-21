@@ -1,0 +1,10 @@
+mmcv-full==1.5.0
+mmaction2==0.15.0
+timm==0.5.4
+matplotlib
+decord==0.6.0
+imgaug==0.4.0
+scipy
+einops==0.4.1
+pyyaml
+yapf
