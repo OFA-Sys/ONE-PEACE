@@ -41,7 +41,7 @@ Following [here](https://github.com/open-mmlab/mmaction2/blob/main/tools/data/ki
 ### Evaluation
 16 Frame:
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK --master_addr=$MASTER_ADDR --master_port=12355 --use_env test.py --launcher pytorch configs/recognition/onepeace_k400.py /path/to/onepeace_action_k400.pth --eval top_k_accuracy
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK --master_addr=$MASTER_ADDR --master_port=12355 --use_env test.py --launcher pytorch configs/recognition/onepeace_k400.py /path/to/onepeace_video_k400.pth --eval top_k_accuracy
 ```
 Expected results:
 ```
@@ -51,7 +51,7 @@ top5_acc: 0.9776
 
 32 Frame:
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK --master_addr=$MASTER_ADDR --master_port=12355 --use_env test.py --launcher pytorch configs/recognition/onepeace_k400_frame32.py /path/to/onepeace_action_k400.pth --eval top_k_accuracy
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK --master_addr=$MASTER_ADDR --master_port=12355 --use_env test.py --launcher pytorch configs/recognition/onepeace_k400_frame32.py /path/to/onepeace_video_k400.pth --eval top_k_accuracy
 ```
 Expected results:
 ```

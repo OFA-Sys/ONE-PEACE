@@ -116,7 +116,7 @@ total_epochs = 30
 
 # runtime settings
 checkpoint_config = dict(interval=10)
-work_dir = './work_dirs/k400_onepiece_patch256.py'
+work_dir = './work_dirs/k400_onepeace_patch256.py'
 find_unused_parameters = False
 
 # do not use mmdet version fp16
