@@ -18,7 +18,7 @@
 <td align="center">16</td>
 <td align="center">88.0</td>
 <td align="center">97.8</td>
-<td align="center">-</a></td>
+<td align="center"><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/onepeace_video_k400.pth">model</a></td>
 </tr>
 <tr><td align="left"><a href="configs/recognition/onepeace_k400_frame32.py">onepeace_k400</a></td>
 <td align="center">64</td>
@@ -26,7 +26,7 @@
 <td align="center">32</td>
 <td align="center">88.1</td>
 <td align="center">97.8</td>
-<td align="center">-</a></td>
+<td align="center"><a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/onepeace_video_k400.pth">model</a></td>
 </tr>
 </tbody></table>
 
@@ -36,7 +36,7 @@ pip install -r requirements.txt
 ```
 
 ### Datasets
-Following [here](https://github.com/open-mmlab/mmaction2/blob/main/tools/data/kinetics/README.md) to prepare Kinetics-400 dataset. Note that we use the [AcademicTorrents](https://academictorrents.com/details/184d11318372f70018cf9a72ef867e2fb9ce1d26) version.
+Following [here](https://github.com/open-mmlab/mmaction2/blob/main/tools/data/kinetics/README.md) to prepare Kinetics-400 dataset. Note that we use the [AcademicTorrents](https://academictorrents.com/details/184d11318372f70018cf9a72ef867e2fb9ce1d26) version. We provide the [validation](https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_datasets/k400_val_academic_torrent.txt) and [training](https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_datasets/kinetics400_train_list_videos_fix.txt) annotations.
 
 ### Evaluation
 16 Frame:
