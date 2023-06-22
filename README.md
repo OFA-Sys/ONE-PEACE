@@ -189,7 +189,7 @@ print("Audio-to-text similarities:", a2t_similarity)
 ```
 
 ## Training & Inference
-In addition to the API, we also provide the instructions of training and inference in [getting_started](one_peace/README.md).
+If you are not satisfied with only using the API, we offer comprehensive training and inference instructions for [audio & multimodal](one_peace/README.md) and [vision](one_peace_vision/README.md) tasks.
 
 <br></br>
 
