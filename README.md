@@ -39,6 +39,7 @@ We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE_Mul
 <br>
 
 # News
+* **2023.6.23:** Released vision tasks fine-tuning scripts and checkpoints. See [guidance for vision tasks](one_peace_vision/README.md) for more details.
 * **2023.6.04:** Released the pretraining scripts. See [guidance for pretraining](one_peace/README.md/##Pretraining) for more details.
 * **2023.5.30:** Released the finetuned checkpoints and scripts for audio(-language) tasks.
 * **2023.5.29:** Released the finetuned checkpoints for vision-language tasks.
