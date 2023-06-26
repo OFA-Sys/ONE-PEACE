@@ -171,8 +171,8 @@ model = from_pretrained("ONE-PEACE", device=device, dtype="float32")
 
 # process raw data
 src_tokens = model.process_text(["cow", "dog", "elephant"])
-src_images = model.process_image(["dog.JPEG", "elephant.JPEG"])
-src_audios, audio_padding_masks = model.process_audio(["cow.flac", "dog.flac"])
+src_images = model.process_image(["demo_assets/dog.JPEG", "demo_assets/elephant.JPEG"])
+src_audios, audio_padding_masks = model.process_audio(["demo_assets/cow.flac", "demo_assets/dog.flac"])
 
 with torch.no_grad():
     # extract normalized features
