@@ -8,6 +8,11 @@ ONE-PEACE can be disassembled into different branches to handle different tasks.
 * <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one-peace-vision.pkl"> ONE-PEACE Vision Branch </a>
 
 ## Vision
+* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/onepeace_ft_21kto1k_384.pth"> Finetuned checkpoint for ImageNet Classification 384 resolution </a>
+* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/onepeace_ft_21kto1k_512.pth"> Finetuned checkpoint for ImageNet Classification 512 resolution </a>
+* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/onepeace_det_coco.pth"> Finetuned checkpoint for COCO Object Detection and Instance Segmentation </a>
+* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/onepeace_seg_cocostuff2ade20k.pth"> Finetuned checkpoint for ADE20K Semantic Segmentation </a>
+* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/onepeace_video_k400.pth"> Finetuned checkpoint for K400 Action Recognition </a>
 
 ## Audio
 * <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_fsd50k.pt"> Finetuned checkpoint for FSD50K </a>

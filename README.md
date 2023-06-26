@@ -39,6 +39,7 @@ We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE_Mul
 <br>
 
 # News
+* **2023.6.23:** Released vision tasks fine-tuning scripts and checkpoints. See [guidance for vision tasks](one_peace_vision/README.md) for more details.
 * **2023.6.04:** Released the pretraining scripts. See [guidance for pretraining](one_peace/README.md/##Pretraining) for more details.
 * **2023.5.30:** Released the finetuned checkpoints and scripts for audio(-language) tasks.
 * **2023.5.29:** Released the finetuned checkpoints for vision-language tasks.
@@ -189,7 +190,7 @@ print("Audio-to-text similarities:", a2t_similarity)
 ```
 
 ## Training & Inference
-In addition to the API, we also provide the instructions of training and inference in [getting_started](one_peace/README.md).
+If you are not satisfied with only using the API, we offer comprehensive training and inference instructions for [audio & multimodal](one_peace/README.md) and [vision](one_peace_vision/README.md) tasks.
 
 <br></br>
 

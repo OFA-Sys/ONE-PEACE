@@ -563,10 +563,11 @@ class OnePeace(BaseModule):
             if self.init_cfg['checkpoint'].endswith(".pkl"):
                 with open(self.init_cfg['checkpoint'], "rb") as f:
                     checkpoint = pickle.load(f, encoding="latin1")
+                model = checkpoint['model']
             else:
                 checkpoint = _load_checkpoint(
                     self.init_cfg['checkpoint'], logger=logger, map_location='cpu')
-            model = checkpoint['model']
+                model = checkpoint['state_dict']
             state_dict = self.resize_abs_pos_embed(model)
             state_dict = self.resize_rel_pos_embed(model)
             msg = self.load_state_dict(state_dict, False)

@@ -5,7 +5,7 @@ _base_ = [
     '../_base_/schedules/schedule_80k.py'
 ]
 crop_size = (896, 896)
-pretrained = '/path/to/one-peace.pt'
+pretrained = '/path/to/one-peace-vision.pkl'
 model = dict(
     pretrained=pretrained,
     backbone=dict(
