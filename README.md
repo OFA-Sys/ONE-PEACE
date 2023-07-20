@@ -39,6 +39,7 @@ We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE_Mul
 <br>
 
 # News
+* **2023.7.20:** Released the [visual grounding API](#api), you can use it to locate objects from the picture.
 * **2023.6.23:** Released vision tasks fine-tuning scripts and checkpoints. See [guidance for vision tasks](one_peace_vision/README.md) for more details.
 * **2023.6.04:** Released the pretraining scripts. See [guidance for pretraining](one_peace/README.md/##Pretraining) for more details.
 * **2023.5.30:** Released the finetuned checkpoints and scripts for audio(-language) tasks.
@@ -161,6 +162,8 @@ See [datasets.md](datasets.md) and [checkpoints.md](checkpoints.md).
 # Usage
 ## API
 We provide a simple code snippet to show how to use the API for ONE-PEACE.
+
+### Multi-modal Embedding
 We use ONE-PEACE to compute embeddings for text, images, and audio, as well as their similarities:
 ```python
 import torch
@@ -187,6 +190,67 @@ with torch.no_grad():
 
 print("Image-to-text similarities:", i2t_similarity)
 print("Audio-to-text similarities:", a2t_similarity)
+```
+
+### Visual Grounding
+We use ONE-PEACE to perform visual grounding on anime pictures:
+```python
+import torch
+import cv2
+from one_peace.models import from_pretrained
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model = from_pretrained(
+	"ONE-PEACE_Grounding",
+    model_type="one_peace_classify",
+    device=device,
+    dtype="float32"
+)
+
+# process raw data
+image_text_list = [
+    ("assets/pokemons.jpg", "a blue turtle-like pokemon with round head"),
+    ("assets/pokemons.jpg", "Bulbasaur"),
+    ("assets/pokemons.jpg", "Charmander"),
+    ("assets/pokemons.jpg", "Squirtle"),
+    ("assets/one_piece.jpeg", "Brook"),
+    ("assets/one_piece.jpeg", "Franky"),
+    ("assets/one_piece.jpeg", "Monkey D. Luffy"),
+    ("assets/one_piece.jpeg", "Nami"),
+    ("assets/one_piece.jpeg", "Nico Robin"),
+    ("assets/one_piece.jpeg", "Roronoa Zoro"),
+    ("assets/one_piece.jpeg", "Tony Tony Chopper"),
+    ("assets/one_piece.jpeg", "Usopp"),
+    ("assets/one_piece.jpeg", "Vinsmoke Sanji"),
+]
+(src_images, image_widths, image_heights), src_tokens  = model.process_image_text_pairs(
+    image_text_list, return_image_sizes=True
+)
+
+with torch.no_grad():
+    # extract features
+    vl_features = model.extract_vl_features(src_images, src_tokens).sigmoid()
+    # extract coords
+    vl_features[:, ::2] *= image_widths.unsqueeze(1)
+    vl_features[:, 1::2] *= image_heights.unsqueeze(1)
+    coords = vl_features.cpu().tolist()
+
+# display results
+for i, image_text_pair in enumerate(image_text_list):
+    image, text = image_text_pair
+    img = cv2.imread(image)
+    cv2.rectangle(
+        img,
+        (int(coords[i][0]), int(coords[i][1])),
+        (int(coords[i][2]), int(coords[i][3])),
+        (0, 255, 0),
+        3
+    )
+    print(image, text)
+    cv2.imshow('visual_grounding', img)
+    cv2.waitKey(5000)
+    cv2.destroyAllWindows()
+
 ```
 
 ## Training & Inference
