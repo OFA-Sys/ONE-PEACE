@@ -39,13 +39,13 @@ We provide the [online demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE_Mul
 <br>
 
 # News
-* **2023.7.20:** Released the [visual grounding API](#api), you can use it to locate objects from the picture.
+* **2023.7.20:** Released the [visual grounding API](https://github.com/OFA-Sys/ONE-PEACE#visual-grounding), you can use it to locate objects from the picture.
 * **2023.6.23:** Released vision tasks fine-tuning scripts and checkpoints. See [guidance for vision tasks](one_peace_vision/README.md) for more details.
 * **2023.6.04:** Released the pretraining scripts. See [guidance for pretraining](one_peace/README.md/##Pretraining) for more details.
 * **2023.5.30:** Released the finetuned checkpoints and scripts for audio(-language) tasks.
 * **2023.5.29:** Released the finetuned checkpoints for vision-language tasks.
 * **2023.5.27:** 🔥 We have provided the [multimodal retrieval demo](https://huggingface.co/spaces/OFA-Sys/ONE-PEACE_Multimodal_Retrieval) in huggingface spaces. Have Fun!
-* **2023.5.25:** Released the [easy-to-use API](#api), which enables the quick extraction for image, audio and text representations.
+* **2023.5.25:** Released the [multimodal embedding API](https://github.com/OFA-Sys/ONE-PEACE#multi-modal-embedding), which enables the quick extraction for image, audio and text representations.
 * **2023.5.23:** Released the [pretrained checkpoint](checkpoints.md), as well as [finetuning & inference scripts](one_peace/README.md) for vision-language tasks.
 * **2023.5.19:** Released the paper and code. Pretrained & finetuned checkpoints, training & inference scripts, as well as demos will be released as soon as possible.
 <br></br>
