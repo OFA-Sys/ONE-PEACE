@@ -247,7 +247,7 @@ for i, image_text_pair in enumerate(image_text_list):
         3
     )
     cv2.imshow(text, img)
-    cv2.waitKey(5000)
+    cv2.waitKey(3500)
     cv2.destroyAllWindows()
 
 ```
