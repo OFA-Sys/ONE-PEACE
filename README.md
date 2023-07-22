@@ -246,8 +246,7 @@ for i, image_text_pair in enumerate(image_text_list):
         (0, 255, 0),
         3
     )
-    print(image, text)
-    cv2.imshow('visual_grounding', img)
+    cv2.imshow(text, img)
     cv2.waitKey(5000)
     cv2.destroyAllWindows()
 
