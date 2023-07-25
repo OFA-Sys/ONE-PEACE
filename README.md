@@ -150,7 +150,7 @@ conda install xformers -c xformers
 * Install [FlashAttention](https://github.com/HazyResearch/flash-attention) library to use faster LayerNorm (optional):
 ```bash
 git clone --recursive https://github.com/HazyResearch/flash-attention
-cd flash-attn && pip install .
+cd flash-attention && pip install .
 cd csrc/layer_norm && pip install .
 ```
 <br>
