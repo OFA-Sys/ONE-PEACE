@@ -4,7 +4,7 @@ We provide links for you to download our checkpoints, including pretrained and f
 
 ## Pretraining
 ONE-PEACE can be disassembled into different branches to handle different tasks. In addition to the full model, we also provide the vision-branch of ONE-PEACE, which can be used to perform vision tasks.
-* <a href="http://one-peace-shanghai.oss-accelerate.aliyuncs.com/one-peace.pt"> Pretrained checkpoint </a>
+* <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one-peace.pt"> Pretrained checkpoint </a>
 * <a href="https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/one-peace-vision.pkl"> ONE-PEACE Vision Branch </a>
 
 ## Vision
