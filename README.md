@@ -11,7 +11,7 @@ This source code is licensed under the Apache 2.0 license found in the LICENSE f
     <br>
 <p>
 <p align="center">
-        <a href="https://arxiv.org/abs/2305.11172">Paper</a>&nbsp&nbsp ｜ &nbsp&nbsp<a href="https://huggingface.co/spaces/OFA-Sys/ONE-PEACE_Multimodal_Retrieval">Demo</a>&nbsp&nbsp | &nbsp&nbsp<a href="checkpoints.md">Checkpoints</a>&nbsp&nbsp ｜ &nbsp&nbsp<a href="datasets.md">Datasets</a>&nbsp&nbsp | &nbsp&nbsp<a href="https://modelscope.cn/models/damo/ONE-PEACE-4B/summary">ModelScope</a>
+        📖 <a href="https://arxiv.org/abs/2305.11172">Paper</a>&nbsp&nbsp ｜ &nbsp🤗 <a href="https://huggingface.co/spaces/OFA-Sys/ONE-PEACE_Multimodal_Retrieval">Demo</a>&nbsp&nbsp | &nbsp&nbsp🤖 <a href="https://modelscope.cn/models/damo/ONE-PEACE-4B/summary">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp<a href="checkpoints.md">Checkpoints</a>&nbsp ｜ &nbsp<a href="datasets.md">Datasets</a>
 </p>
 <br>
 
