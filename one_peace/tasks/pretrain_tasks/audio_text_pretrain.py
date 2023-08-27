@@ -12,9 +12,9 @@ import torch
 from fairseq.tasks import register_task
 from fairseq.utils import move_to_cuda
 
-from one_peace.tasks.base_task import BaseTask, BaseTaskConfig
-from one_peace.data.pretrain_data.audio_text_pretrain_dataset import AudioTextPretrainDataset
-from one_peace.metrics import Recall
+from ..base_task import BaseTask, BaseTaskConfig
+from ...data.pretrain_data.audio_text_pretrain_dataset import AudioTextPretrainDataset
+from ...metrics import Recall
 
 logger = logging.getLogger(__name__)
 
@@ -23,20 +23,20 @@ logger = logging.getLogger(__name__)
 class AudioTextPretrainConfig(BaseTaskConfig):
     valid_file: Optional[str] = field(
         default=None,
-        metadata={"help": ""},
+        metadata={"help": "validation file, json format."},
     )
 
     audio_mask_ratio: float = field(
         default=0.55,
-        metadata={"help": ""}
+        metadata={"help": "mask ratio of audio data"}
     )
     al_text_mask_ratio: float = field(
         default=0.4,
-        metadata={"help": ""}
+        metadata={"help": "text mask ratio of audio-language data"}
     )
     al_audio_mask_ratio: float = field(
         default=0.45,
-        metadata={"help": ""}
+        metadata={"help": "audio mask ratio of audio-language data"}
     )
 
     audio_mask_prob_adjust: float = 0.1
@@ -54,12 +54,13 @@ class AudioTextPretrainTask(BaseTask):
     def load_dataset(self, split, epoch=1, **kwargs):
         dataset = super().load_dataset(split, epoch, **kwargs)
 
-        if self.text_ids is None:
+        if self.text_ids is None and self.cfg.valid_file is not None:
             self.text_ids = []
             self.texts = []
-            for text_id, text in json.load(open(self.cfg.valid_file)).items():
-                self.text_ids.append(text_id)
-                self.texts.append(text)
+            for text_id, text_list in json.load(open(self.cfg.valid_file)).items():
+                for text in text_list:
+                    self.text_ids.append(int(text_id))
+                    self.texts.append(text)
             self.text_ids = torch.tensor(self.text_ids).cuda()
 
         self.datasets[split] = AudioTextPretrainDataset(
@@ -79,6 +80,7 @@ class AudioTextPretrainTask(BaseTask):
 
     @torch.no_grad()
     def begin_valid_epoch(self, epoch, model, subset):
+        assert self.text_ids is not None and self.texts is not None
         model.eval()
 
         dataset = self.datasets[subset]
@@ -87,7 +89,7 @@ class AudioTextPretrainTask(BaseTask):
         samples_list = []
         for text in self.texts:
             text = "This is a sound of " + text
-            item_tuple = (0, None, text, 1, None)
+            item_tuple = (0, None, text, 1)
             sample = dataset.__getitem__(0, item_tuple)
             samples_list.append(sample)
         samples = dataset.collater(samples_list)
@@ -118,8 +120,8 @@ class AudioTextPretrainTask(BaseTask):
         self.metric.compute(audio_ids, audio_logits)
 
     @torch.no_grad()
-    def merge_results(self):
-        stats =  self.metric.merge_results()
+    def merge_results(self, output_predict=False):
+        stats =  self.metric.merge_results(output_predict=output_predict)
         for key in list(stats.keys()):
             if key.startswith('img'):
                 stats[key.replace('img', 'audio')] = stats[key]

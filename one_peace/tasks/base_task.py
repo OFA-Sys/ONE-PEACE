@@ -18,8 +18,8 @@ from fairseq.dataclass import FairseqDataclass, ChoiceEnum
 from fairseq.tasks import FairseqTask, register_task
 from omegaconf import DictConfig
 
-from one_peace.data.tsv_reader import TSVReader
-from one_peace.data.iterators import EpochBatchIterator
+from ..data.tsv_reader import TSVReader
+from ..data.iterators import EpochBatchIterator
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +52,7 @@ class BaseTaskConfig(FairseqDataclass):
         default=70, metadata={"help": "the maximum text sequence length"}
     )
     patch_image_size: int = field(
-        default=256, metadata={"help": "image resolution"}
+        default=256, metadata={"help": "the image resolution"}
     )
     max_duration: int = field(
         default=15, metadata={"help": "the maximum audio duration"}
@@ -66,7 +66,7 @@ class BaseTaskConfig(FairseqDataclass):
 
     head_type: ChoiceEnum(["text", "image", "audio", "vl", "al", "val"]) = field(
         default='vl',
-        metadata={"help": ""}
+        metadata={"help": "classifier head types"}
     )
     num_classes: Optional[int] = field(
         default=None,
@@ -172,6 +172,11 @@ class BaseTask(FairseqTask):
             global_num_batches -= global_num_batches % num_shards
             total_row_count = global_num_batches * max_sentences
             sample_ids = sample_ids[:total_row_count]
+        if ensure_equal_batch and global_num_batches % num_shards != 0:
+            assert not skip_remainder_batch
+            global_num_batches += num_shards - global_num_batches % num_shards
+            total_row_count = global_num_batches * max_sentences
+            sample_ids = sample_ids + sample_ids[:total_row_count-len(sample_ids)]
 
         global_batch_sampler = [
             [sample_ids[j] for j in range(i, min(i + max_sentences, total_row_count))]
@@ -205,7 +210,7 @@ class BaseTask(FairseqTask):
     def valid_step(self, sample, model, criterion, is_dummy_batch):
         loss, sample_size, logging_output = super().valid_step(sample, model, criterion)
         if not is_dummy_batch:
-            self.eval_step(model, sample, self.metric)
+            self.eval_step(model, sample)
         return loss, sample_size, logging_output
 
     @torch.no_grad()
@@ -213,9 +218,9 @@ class BaseTask(FairseqTask):
         raise NotImplementedError
 
     @torch.no_grad()
-    def merge_results(self):
+    def merge_results(self, output_predict=False):
         if self.metric is not None:
-            return self.metric.merge_results()
+            return self.metric.merge_results(output_predict=output_predict)
 
     def max_positions(self):
         return self.cfg.max_positions

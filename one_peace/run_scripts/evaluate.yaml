@@ -1,0 +1,34 @@
+
+common_eval:
+  path: ???
+
+task:
+  _name: ???
+  bpe_dir: ../../utils/BPE
+
+dataset:
+  num_workers: 8
+  batch_size: 16
+  gen_subset: ???
+
+common:
+
+  # use bf16
+  fp16: false
+  memory_efficient_fp16: false
+  bf16: true
+  memory_efficient_bf16: true
+
+  # use fp16
+  #  fp16: true
+  #  memory_efficient_fp16: true
+  #  bf16: false
+  #  memory_efficient_bf16: false
+
+  log_format: simple
+  log_interval: 10
+  seed: 3407
+  user_dir: ../../user_module
+
+model:
+  _name: ???

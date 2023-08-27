@@ -251,7 +251,7 @@ class CommonConfig(FairseqDataclass):
         },
     )
 
-    # for one-piece
+    # for one-peace
     layer_decay: float = field(
         default=1.0,
         metadata={
@@ -604,6 +604,12 @@ class DatasetConfig(FairseqDataclass):
         },
     )
 
+    ensure_equal_batch: bool = field(
+        default=False,
+        metadata={
+            "help": "",
+        },
+    )
     persistent_workers: bool = field(
         default=False,
         metadata={

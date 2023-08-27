@@ -1,0 +1,43 @@
+
+default_yaml: ../finetune_3B.yaml
+
+task:
+  _name: refcoco
+  data: ???
+  valid_data: ???
+  selected_cols: image,text,region_coord
+  patch_image_size: 384
+
+  head_type: vl
+  num_classes: 4
+
+criterion:
+  _name: refcoco_criterion
+
+optimization:
+  max_epoch: 30
+  lr: [1.5e-4]
+  update_freq: [8]
+
+lr_scheduler:
+  _name: adjust_cosine
+  warmup_ratio: 0.1
+
+dataset:
+  batch_size: 4
+
+common:
+  layer_decay: 0.9
+
+checkpoint:
+  best_checkpoint_metric: iou_acc
+
+model:
+  _name: one_peace_classify
+  head_scale_ratio: 2
+  use_pooler: false
+  pooler_dropout: 0.0
+  attn_pooling: true
+
+  encoder:
+    drop_path_rate: 0.4

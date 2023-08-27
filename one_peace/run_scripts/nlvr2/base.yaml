@@ -1,0 +1,48 @@
+
+default_yaml: ../finetune_3B.yaml
+
+task:
+  _name: nlvr2
+  data: ../../dataset/nlvr2/train.tsv
+  valid_data: ../../dataset/nlvr2/dev.tsv
+  selected_cols: uniq_id,text,image1,image2,label
+  patch_image_size: 256
+
+  head_type: vl
+  num_classes: 2
+  use_two_images: true
+
+criterion:
+  _name: classify_criterion
+
+optimization:
+  max_epoch: 25
+  lr: [1e-4]
+  update_freq: [2]
+
+lr_scheduler:
+  _name: adjust_cosine
+  warmup_ratio: 0.1
+
+dataset:
+  batch_size: 8
+
+common:
+  layer_decay: 0.9
+
+checkpoint:
+  best_checkpoint_metric: accuracy
+
+model:
+  _name: one_peace_classify
+  head_scale_ratio: 2
+  use_pooler: false
+  pooler_dropout: 0.0
+  attn_pooling: true
+
+  encoder:
+    text_adapter:
+      add_type_embedding: true
+    image_adapter:
+      add_type_embedding: true
+    drop_path_rate: 0.4

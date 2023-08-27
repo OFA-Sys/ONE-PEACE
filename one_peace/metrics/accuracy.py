@@ -2,7 +2,7 @@ import torch
 import torch.distributed as dist
 
 from .base_metric import BaseMetric
-from one_peace.utils.data_utils import all_gather
+from ..utils.data_utils import all_gather
 
 
 class Accuracy(BaseMetric):
@@ -28,7 +28,7 @@ class Accuracy(BaseMetric):
         self.ids = torch.cat([self.ids, ids], dim=0)
         self.hyps = torch.cat([self.hyps, predict_labels], dim=0)
 
-    def merge_results(self):
+    def merge_results(self, output_predict=False):
         if dist.is_initialized():
             dist.all_reduce(self.score_sum, op=dist.ReduceOp.SUM)
             dist.all_reduce(self.score_cnt, op=dist.ReduceOp.SUM)
@@ -38,12 +38,16 @@ class Accuracy(BaseMetric):
             ids = self.ids
             hyps = self.hyps
 
+        predict_results = {}
+        if output_predict:
+            for id, hyp in zip(ids.cpu().tolist(), hyps.cpu().tolist()):
+                predict_results[id] = hyp
+
         score_sum = self.score_sum.item()
         score_cnt = self.score_cnt.item()
         return {
             'accuracy': score_sum / score_cnt,
             'score_sum': score_sum,
             'score_cnt': score_cnt,
-            'ids': ids.cpu().tolist(),
-            'hyps': hyps.cpu().tolist(),
+            'predict_results': predict_results
         }

@@ -1,0 +1,38 @@
+
+default_yaml: ../finetune_3B.yaml
+
+task:
+  _name: image_text_retrieval
+  data: ???
+  valid_data: ???
+  selected_cols: image_id,image,caption
+  patch_image_size: 256
+  valid_file: ???
+
+criterion:
+  _name: image_text_retrieval_criterion
+  label_smoothing: 0.0
+
+optimization:
+  max_epoch: ???
+  lr: ???
+  update_freq: [1]
+  skip_remainder_batch: false
+
+lr_scheduler:
+  _name: adjust_cosine
+  warmup_ratio: 0.1
+
+dataset:
+  batch_size: 2
+  ensure_equal_batch: true
+
+common:
+  layer_decay: 0.9
+
+checkpoint:
+  best_checkpoint_metric: txt_r1
+
+model:
+  _name: one_peace_retrieval
+  copy_rel_pos_table: true

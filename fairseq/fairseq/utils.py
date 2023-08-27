@@ -354,7 +354,7 @@ def clip_grad_norm_(params, max_norm, aggregate_norm_fn=None) -> torch.Tensor:
         params = [params]
     params = list(params)
     grads = [
-        p.grad.detach().float() for p in params if grad_exists(p) and not hasattr(p, "expert")
+        p.grad.detach() for p in params if grad_exists(p) and not hasattr(p, "expert")
     ]
     expert_grads = [
         p.grad.detach() for p in params if grad_exists(p) and hasattr(p, "expert")

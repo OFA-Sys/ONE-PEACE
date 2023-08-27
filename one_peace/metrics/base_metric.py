@@ -10,5 +10,5 @@ class BaseMetric(object):
     def compute(self, models, sample):
         raise NotImplementedError
 
-    def merge_results(self):
+    def merge_results(self, output_predict=False):
         raise NotImplementedError

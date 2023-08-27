@@ -14,7 +14,7 @@ from fairseq.modules import (
     LayerDropModuleList
 )
 
-from one_peace.models.components import LayerNorm
+from ..components import LayerNorm
 from .transformer_layer import TransformerEncoderLayer
 
 logger = logging.getLogger(__name__)

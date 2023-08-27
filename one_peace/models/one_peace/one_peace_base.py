@@ -4,9 +4,10 @@
 # found in the LICENSE file in the root directory.
 
 """
-One-Piece Base Model Wrapper
+ONE-PEACE Base Model Wrapper
 """
 
+import logging
 from typing import Optional
 
 import torch
@@ -15,19 +16,24 @@ import math
 from fairseq.models import register_model, BaseFairseqModel
 from fairseq import utils
 
-from one_peace.models.unify_model_config import UnifyModelConfig
-from one_peace.models.components import trunc_normal_
-from one_peace.models.adapter.text import TextAdapter
-from one_peace.models.adapter.image import ImageAdapter
-from one_peace.models.adapter.audio import AudioAdapter
-from one_peace.models.transformer.transformer_encoder import TransformerEncoder
-from one_peace.models.components import Linear, LayerNorm
+from ..unify_model_config import UnifyModelConfig
+from ..components import trunc_normal_
+from ..adapter.text import TextAdapter
+from ..adapter.image import ImageAdapter
+from ..adapter.audio import AudioAdapter
+from ..transformer.transformer_encoder import TransformerEncoder
+from ..components import Linear, LayerNorm
+
+logger = logging.getLogger(__name__)
 
 try:
-    from apex.transformer.functional.fused_softmax import generic_scaled_masked_softmax
-    use_apex = True
-except Exception as e:
-    use_apex = False
+    import xformers
+    from xformers.ops.fmha import memory_efficient_attention
+    has_xformers = True
+    logger.info('****** use memory_efficient_attention ******')
+except ImportError:
+    has_xformers = False
+    logger.info('****** Import memory_efficient_attention fail, please install xFormers ******')
 
 
 class ModelWrapper(nn.Module):
@@ -155,12 +161,9 @@ class MultiheadAttentionPooling(nn.Module):
 
         attn_weights = attn_weights.view(bsz, self.num_heads, 1, seq_len)
         key_padding_mask = key_padding_mask.view(bsz, 1, 1, seq_len).contiguous()
-        if attn_weights.dtype != torch.float32 and use_apex:
-            attn_probs = generic_scaled_masked_softmax(attn_weights, key_padding_mask, 1.0)
-        else:
-            attn_weights.masked_fill_(key_padding_mask.expand(bsz, self.num_heads, 1, seq_len), -math.inf)
-            attn_weights_float = utils.softmax(attn_weights, dim=-1)
-            attn_probs = attn_weights_float.type_as(attn_weights)
+        attn_weights.masked_fill_(key_padding_mask.expand(bsz, self.num_heads, 1, seq_len), -math.inf)
+        attn_weights_float = utils.softmax(attn_weights, dim=-1)
+        attn_probs = attn_weights_float.type_as(attn_weights)
         attn_probs = attn_probs.view(bsz * self.num_heads, 1, seq_len)
         attn = torch.bmm(attn_probs, v)
 
@@ -174,23 +177,18 @@ class OnePeaceClassifyHead(nn.Module):
 
     def __init__(
         self,
-        mean_pooling: bool,
         attn_pooling: bool,
         use_pooler: bool,
         pooler_dropout: float,
         input_dim: int,
         num_heads: int,
         head_scale_ratio: float,
-        classify_with_gelu: bool,
         num_classes: int,
-        use_two_images: bool = False,
-        backbone_lr_shrink: float = 0
+        use_two_images: bool = False
     ):
         super().__init__()
-        self.mean_pooling = mean_pooling
         self.attn_pooling = attn_pooling
         self.norm = LayerNorm(input_dim)
-        self.backbone_lr_shrink = backbone_lr_shrink
 
         self.attn_pooling_func = None
         if self.attn_pooling:
@@ -210,19 +208,13 @@ class OnePeaceClassifyHead(nn.Module):
         inner_dim = int(input_dim * head_scale_ratio)
         self.classifier = nn.Sequential(
             Linear(classifier_input_dim, inner_dim),
-            LayerNorm(inner_dim) if classify_with_gelu else nn.Identity(),
-            nn.GELU() if classify_with_gelu else nn.Identity(),
+            LayerNorm(inner_dim),
+            nn.GELU(),
             Linear(inner_dim, num_classes)
         )
 
     def forward_features(self, features, padding_masks):
-        if self.mean_pooling:
-            features = features[:, 1:, :]
-            padding_masks = padding_masks[:, 1:]
-            features.masked_fill_(padding_masks.unsqueeze(2), 0)
-            x = features.sum(dim=1) / (~padding_masks).sum(1, keepdim=True)
-            x = self.norm(x)
-        elif self.attn_pooling:
+        if self.attn_pooling:
             other_logits = features[:, 1:, :]
             padding_masks = padding_masks[:, 1:]
             x = self.attn_pooling_func(other_logits, padding_masks)
@@ -233,17 +225,7 @@ class OnePeaceClassifyHead(nn.Module):
         x = self.pooler(x) if self.pooler is not None else x
         return x
 
-    def shrink_features_lr(self, x):
-        if x is not None:
-            return x * self.backbone_lr_shrink + x.detach() * (1 - self.backbone_lr_shrink)
-        else:
-            return None
-
     def forward(self, features_1, features_2, padding_masks):
-        if self.backbone_lr_shrink != 1.0:
-            features_1 = self.shrink_features_lr(features_1)
-            features_2 = self.shrink_features_lr(features_2)
-
         x = self.forward_features(features_1, padding_masks)
         if features_2 is not None:
             x_2 = self.forward_features(features_2, padding_masks)

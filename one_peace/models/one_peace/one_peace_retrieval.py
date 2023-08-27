@@ -4,7 +4,7 @@
 # found in the LICENSE file in the root directory.
 
 """
-One-Piece Retrieval
+ONE-PEACE Retrieval
 """
 from typing import Optional
 from dataclasses import dataclass
@@ -19,16 +19,16 @@ from fairseq.models import register_model
 from fairseq.distributed import fsdp_wrap
 from fairseq.modules.checkpoint_activations import checkpoint_wrapper
 
-from one_peace.models.unify_model_config import UnifyModelConfig
-from one_peace.models.components import Linear
-from one_peace.models.one_peace.one_peace_base import ModelWrapper, OnePeaceBaseModel, init_one_peace_params
+from ..unify_model_config import UnifyModelConfig
+from ..components import Linear
+from .one_peace_base import ModelWrapper, OnePeaceBaseModel, init_one_peace_params
 
 logger = logging.getLogger(__name__)
 
 
 @dataclass
 class OnePeaceRetrievalConfig(UnifyModelConfig):
-    pass
+    copy_rel_pos_table: bool = False
 
 
 @register_model("one_peace_retrieval", dataclass=OnePeaceRetrievalConfig)
@@ -55,7 +55,8 @@ class OnePeaceRetrievalModel(OnePeaceBaseModel):
             src_dict,
             use_text_norm=cfg.encoder.use_text_moe,
             use_image_norm=cfg.encoder.use_image_moe,
-            use_audio_norm=cfg.encoder.use_audio_moe
+            use_audio_norm=cfg.encoder.use_audio_moe,
+            num_layers=cfg.encoder.layers if cfg.copy_rel_pos_table else None
         )
         if cfg.encoder.use_text_moe:
             self.text_proj = Linear(embed_dim, embed_dim)

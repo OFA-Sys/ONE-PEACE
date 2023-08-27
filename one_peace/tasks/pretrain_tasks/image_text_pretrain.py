@@ -9,15 +9,14 @@ import json
 import logging
 import torch
 import torch.distributed as dist
-import torch.nn.functional as F
 
 from fairseq.tasks import register_task
 from fairseq.utils import move_to_cuda
 
-from one_peace.tasks.base_task import BaseTask, BaseTaskConfig
-from one_peace.data.pretrain_data.image_text_pretrain_dataset import ImageTextPretrainDataset
-from one_peace.utils.data_utils import new_islice, all_gather
-from one_peace.metrics import Recall
+from ..base_task import BaseTask, BaseTaskConfig
+from ...data.pretrain_data.image_text_pretrain_dataset import ImageTextPretrainDataset
+from ...utils.data_utils import new_islice, all_gather
+from ...metrics import Recall
 
 logger = logging.getLogger(__name__)
 
@@ -30,19 +29,19 @@ class ImageTextPretrainConfig(BaseTaskConfig):
     )
     text_mask_ratio: float = field(
         default=0.15,
-        metadata={"help": ""}
+        metadata={"help": "mask ratio of text data"}
     )
     image_mask_ratio: float = field(
         default=0.75,
-        metadata={"help": ""}
+        metadata={"help": "mask ratio of image data"}
     )
     vl_text_mask_ratio: float = field(
         default=0.4,
-        metadata={"help": ""}
+        metadata={"help": "text mask ratio of vision-language data"}
     )
     vl_image_mask_ratio: float = field(
         default=0.6875,
-        metadata={"help": ""}
+        metadata={"help": "image mask ratio of vision-language data"}
     )
     min_scale: float = field(
         default=0.9,
@@ -61,14 +60,14 @@ class ImageTextPretrainTask(BaseTask):
     def load_dataset(self, split, epoch=1, **kwargs):
         dataset = super().load_dataset(split, epoch, **kwargs)
 
-        self.text_ids = []
-        self.texts = []
-        for text_id, text_list in json.load(open(self.cfg.valid_file)).items():
-            text_list = eval(text_list)
-            for text in text_list:
-                self.text_ids.append(text_id)
-                self.texts.append(text)
-        self.text_ids = torch.tensor(self.text_ids).cuda()
+        if self.text_ids is None and self.cfg.valid_file is not None:
+            self.text_ids = []
+            self.texts = []
+            for text_id, text_list in json.load(open(self.cfg.valid_file)).items():
+                for text in text_list:
+                    self.text_ids.append(int(text_id))
+                    self.texts.append(text)
+            self.text_ids = torch.tensor(self.text_ids).cuda()
 
         self.datasets[split] = ImageTextPretrainDataset(
             split,
@@ -86,6 +85,7 @@ class ImageTextPretrainTask(BaseTask):
 
     @torch.no_grad()
     def begin_valid_epoch(self, epoch, model, subset):
+        assert self.text_ids is not None and self.texts is not None
         model.eval()
 
         dataset = self.datasets[subset]
@@ -112,7 +112,6 @@ class ImageTextPretrainTask(BaseTask):
             samples = move_to_cuda(samples)
             src_tokens = samples["net_input"]["src_tokens"]
             text_logits, _ = model(src_tokens=src_tokens, encoder_type='text')
-            text_logits = F.normalize(text_logits, dim=-1)
             text_logits_list.append(text_logits)
 
         text_logits = torch.cat(text_logits_list, dim=0)

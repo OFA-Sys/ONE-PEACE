@@ -1,0 +1,36 @@
+
+default_yaml: ../finetune_3B.yaml
+
+task:
+  _name: aqa
+  data: ../../dataset/avqa/avqa_train.tsv
+  valid_data: ../../dataset/avqa/avqa_val.tsv
+  selected_cols: uniq_id,audio,text,duration
+
+  max_duration: 15
+  head_type: al
+  num_classes: 1
+
+criterion:
+  _name: hinge_loss
+
+optimization:
+  max_epoch: 10
+  lr: [7e-5]
+  update_freq: [16]
+
+dataset:
+  batch_size: 1
+
+common:
+  layer_decay: 0.9
+
+checkpoint:
+  best_checkpoint_metric: accuracy
+
+model:
+  _name: one_peace_classify
+  head_scale_ratio: 2
+  use_pooler: false
+  pooler_dropout: 0.0
+  attn_pooling: true

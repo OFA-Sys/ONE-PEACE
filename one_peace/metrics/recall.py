@@ -2,7 +2,7 @@ import torch
 import torch.distributed as dist
 
 from .base_metric import BaseMetric
-from one_peace.utils.data_utils import all_gather
+from ..utils.data_utils import all_gather
 
 
 class Recall(BaseMetric):
@@ -19,7 +19,7 @@ class Recall(BaseMetric):
         self.image_ids_list.append(image_ids)
         self.image_logits_list.append(image_logits)
 
-    def merge_results(self):
+    def merge_results(self, output_predict=False):
         image_ids = torch.cat(self.image_ids_list, dim=0)
         image_logits = torch.cat(self.image_logits_list, dim=0)
         if dist.is_initialized():
@@ -31,10 +31,10 @@ class Recall(BaseMetric):
 
         sim_i2t = self.image_logits @ self.text_logits.t()
         sim_t2i = sim_i2t.t()
-        eval_log = self.retrieval_eval(sim_i2t, sim_t2i)
+        eval_log = self.retrieval_eval(sim_i2t, sim_t2i, output_predict)
         return eval_log
 
-    def retrieval_eval(self, scores_i2t, scores_t2i):
+    def retrieval_eval(self, scores_i2t, scores_t2i, output_predict=False):
         # Image->Text
         _, rank_txt = scores_i2t.topk(k=10, dim=1)
         predict_txt = self.text_ids[None, :].expand(rank_txt.size(0), -1).gather(1, rank_txt)
@@ -55,6 +55,14 @@ class Recall(BaseMetric):
         ir_r10 = 100.0 * t2i_corrects[2] / scores_t2i.size(0)
         ir_mean = (ir_r1 + ir_r5 + ir_r10) / 3
 
+        predict_txt_results = {}
+        predict_img_results = {}
+        if output_predict:
+            for img_id, predict_txt_ in zip(self.image_ids.cpu().tolist(), predict_txt.cpu().tolist()):
+                predict_txt_results[img_id] = predict_txt_
+            for txt_id, predict_img_ in zip(self.text_ids.cpu().tolist(), predict_img.cpu().tolist()):
+                predict_img_results[txt_id] = predict_img_
+
         eval_log = {'txt_r1': tr_r1,
                     'txt_r5': tr_r5,
                     'txt_r10': tr_r10,
@@ -65,5 +73,7 @@ class Recall(BaseMetric):
                     'img_r10': ir_r10,
                     'img_r_mean': ir_mean,
                     'r_mean': (tr_mean + ir_mean) / 2,
-                    'txt_count': scores_t2i.size(0)}
+                    'txt_count': scores_t2i.size(0),
+                    'predict_txt': predict_txt_results,
+                    'predict_img': predict_img_results}
         return eval_log

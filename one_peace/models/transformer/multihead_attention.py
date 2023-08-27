@@ -12,8 +12,7 @@ from torch import nn
 from fairseq import utils
 from fairseq.modules.fairseq_dropout import FairseqDropout
 
-from one_peace.models.components import Linear, LayerNorm
-from einops import rearrange
+from ..components import Linear, LayerNorm
 
 logger = logging.getLogger(__name__)
 
@@ -24,47 +23,7 @@ try:
     logger.info('****** use memory_efficient_attention ******')
 except ImportError:
     has_xformers = False
-    logger.info('****** Import memory_efficient_attention fail ******')
-
-try:
-    from apex.transformer.functional.fused_softmax import generic_scaled_masked_softmax
-    has_fused = True
-    logger.info('****** use generic_scaled_masked_softmax ******')
-except ImportError:
-    has_fused = False
-    logger.info('****** Import generic_scaled_masked_softmax fail ******')
-
-
-def unpad_input(hidden_states, attention_mask):
-    """
-    Arguments:
-        hidden_states: (batch, seqlen, ...)
-        attention_mask: (batch, seqlen), bool / int, 1 means valid and 0 means not valid.
-    Return:
-        hidden_states: (total_nnz, ...), where total_nnz = number of tokens in selected in attention_mask.
-        cu_seqlens: (batch + 1), the cumulative sequence lengths, used to index into hidden_states.
-        max_seqlen_in_batch: int
-    """
-    embed_dim = hidden_states.size(2)
-    seqlens_in_batch = attention_mask.sum(dim=-1, dtype=torch.int32)
-    indices = torch.nonzero(attention_mask.flatten(), as_tuple=False).flatten()
-    max_seqlen_in_batch = seqlens_in_batch.max().item()
-    cu_seqlens = F.pad(torch.cumsum(seqlens_in_batch, dim=0, dtype=torch.torch.int32), (1, 0))
-    hidden_states = hidden_states.reshape(-1, embed_dim)[indices]
-    return  hidden_states, indices, cu_seqlens, max_seqlen_in_batch
-
-
-def pad_input(hidden_states, indices, batch, seqlen):
-    """
-    Arguments:
-        hidden_states: (total_nnz, ...), where total_nnz = number of tokens in selected in attention_mask.
-        indices: (total_nnz)
-    Return:
-        hidden_states: (batch, seqlen, ...)
-    """
-    output = torch.zeros(batch * seqlen, *hidden_states.shape[1:], device=hidden_states.device, dtype=hidden_states.dtype)
-    output[indices] = hidden_states
-    return rearrange(output, '(b s) ... -> b s ...', b=batch)
+    logger.info('****** Import memory_efficient_attention fail, please install xFormers ******')
 
 
 class MultiheadAttention(nn.Module):
@@ -84,7 +43,7 @@ class MultiheadAttention(nn.Module):
         super().__init__()
         self.embed_dim = embed_dim
         if has_xformers:
-            assert dropout == 0.0, "xformers cant support dropout"
+            assert dropout == 0.0, "xformers doesn't support dropout"
 
         self.num_heads = num_heads
         self.dropout_p = dropout
@@ -113,6 +72,7 @@ class MultiheadAttention(nn.Module):
             key_padding_mask (ByteTensor, optional): mask to exclude
                 keys that are pads, of shape `(batch, src_len)`, where
                 padding elements are indicated by 1s.
+            attn_mask (FloatTensor, optional): equal to relative position bias
         """
 
         seq_len, bsz, embed_dim = x.size()
@@ -149,14 +109,8 @@ class MultiheadAttention(nn.Module):
             if attn_mask is not None:
                 attn_weights += attn_mask.view(-1, seq_len, seq_len)
 
-            if has_fused and attn_weights.dtype != torch.float32:
-                attn_weights = attn_weights.view(bsz, self.num_heads, seq_len, seq_len)
-                key_padding_mask = key_padding_mask.view(bsz, 1, 1, seq_len).expand(-1, -1, seq_len, -1).contiguous()
-                attn_weights = generic_scaled_masked_softmax(attn_weights, key_padding_mask, 1.0)
-                attn_weights = attn_weights.view(bsz * self.num_heads, seq_len, seq_len)
-            else:
-                attn_weights_float = utils.softmax(attn_weights, dim=-1)
-                attn_weights = attn_weights_float.type_as(attn_weights)
+            attn_weights_float = utils.softmax(attn_weights, dim=-1)
+            attn_weights = attn_weights_float.type_as(attn_weights)
             attn_probs = self.dropout_module(attn_weights)
             attn = torch.bmm(attn_probs, v)
 

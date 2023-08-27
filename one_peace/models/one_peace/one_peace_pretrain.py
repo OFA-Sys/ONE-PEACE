@@ -4,7 +4,7 @@
 # found in the LICENSE file in the root directory.
 
 """
-One-Piece Pretrain
+ONE-PEACE Pretrain
 """
 from typing import Optional
 from dataclasses import dataclass
@@ -19,9 +19,9 @@ from fairseq.models import register_model
 from fairseq.distributed import fsdp_wrap
 from fairseq.modules.checkpoint_activations import checkpoint_wrapper
 
-from one_peace.models.unify_model_config import UnifyModelConfig
-from one_peace.models.one_peace.one_peace_base import ModelWrapper, OnePeaceBaseModel, init_one_peace_params
-from one_peace.models.components import Linear, trunc_normal_
+from ..unify_model_config import UnifyModelConfig
+from .one_peace_base import ModelWrapper, OnePeaceBaseModel, init_one_peace_params
+from ..components import Linear, trunc_normal_
 
 logger = logging.getLogger(__name__)
 

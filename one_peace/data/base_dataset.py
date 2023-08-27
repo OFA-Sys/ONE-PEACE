@@ -3,16 +3,19 @@
 # This source code is licensed under the Apache 2.0 license
 # found in the LICENSE file in the root directory.
 
+import os
 import math
 import logging
 import warnings
 import re
 import torch
 import torch.nn.functional as F
+import soundfile as sf
+from PIL import Image
 
 from fairseq.data import FairseqDataset
 
-from one_peace.data import collate_fn
+from . import collate_fn
 
 logger = logging.getLogger(__name__)
 warnings.filterwarnings("ignore", "(Possibly )?corrupt EXIF data", UserWarning)
@@ -32,11 +35,24 @@ class BaseDataset(FairseqDataset):
         self.eos = dictionary.eos()
         self.pad = dictionary.pad()
 
+        self.dataset_dir = os.path.join(
+            os.path.abspath(os.path.join(os.path.realpath(__file__), "../..")),
+            "dataset"
+        )
+
         # for audio
         self._features_size_map = {}
 
     def __len__(self):
         return len(self.dataset)
+
+    def read_image(self, image_path):
+        path = os.path.join(self.dataset_dir, image_path)
+        return Image.open(path).convert("RGB")
+
+    def read_audio(self, audio_path):
+        path = os.path.join(self.dataset_dir, audio_path)
+        return sf.read(path, dtype="float32")
 
     def encode_text(self, text, length=None, use_bpe=True, append_eos=True):
         s = self.dict.encode_line(
@@ -65,7 +81,7 @@ class BaseDataset(FairseqDataset):
 
         return text
 
-    def postprocess(self, feats, curr_sample_rate, max_duration=15):
+    def audio_postprocess(self, feats, curr_sample_rate, max_duration=15):
         if feats.dim() == 2:
             feats = feats.mean(-1)
 

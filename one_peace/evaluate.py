@@ -21,6 +21,7 @@ from fairseq.dataclass.utils import omegaconf_no_object_check
 from fairseq.dataclass.initialize import add_defaults
 from omegaconf import DictConfig
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
@@ -138,13 +139,19 @@ def main(cfg: DictConfig):
         progress.log({"sentences": sample["nsentences"]})
 
     if task.metric is not None:
-        stats = task.metric.merge_results()
-        logger.info(stats)
-        if not dist.is_initialized() or dist.get_rank() == 0 and cfg.common_eval.results_path is not None:
+        stats = task.metric.merge_results(output_predict=True)
+        if (not dist.is_initialized() or dist.get_rank() == 0) and cfg.common_eval.results_path is not None:
             os.makedirs(cfg.common_eval.results_path, exist_ok=True)
             output_path = os.path.join(cfg.common_eval.results_path, "{}_predict.json".format(cfg.dataset.gen_subset))
             with open(output_path, 'w') as fw:
                 json.dump(stats, fw)
+        if 'predict_results' in stats:
+            del stats['predict_results']
+        if 'predict_txt' in stats:
+            assert 'predict_img' in stats
+            del stats['predict_txt']
+            del stats['predict_img']
+        logger.info(stats)
 
 
 def cli_main():

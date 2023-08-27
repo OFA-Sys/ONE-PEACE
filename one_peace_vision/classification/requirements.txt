@@ -1,0 +1,5 @@
+Pillow
+timm==0.5.4
+tensorboard
+deepspeed==0.8.1
+scipy

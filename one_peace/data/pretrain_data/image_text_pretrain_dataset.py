@@ -9,10 +9,8 @@ import torch
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
 
-from PIL import Image
-
-from one_peace.data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
-from one_peace.utils.data_utils import get_whole_word_mask
+from ..base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
+from ...utils.data_utils import get_whole_word_mask
 
 
 class ImageTextPretrainDataset(BaseDataset):
@@ -23,11 +21,11 @@ class ImageTextPretrainDataset(BaseDataset):
         bpe,
         dictionary,
         max_src_length=70,
+        patch_image_size=256,
         text_mask_ratio=0.15,
         image_mask_ratio=0.75,
         vl_text_mask_ratio=0.4,
         vl_image_mask_ratio=0.6875,
-        patch_image_size=256,
         min_scale=0.9
     ):
         super().__init__(split, dataset, bpe, dictionary)
@@ -79,7 +77,7 @@ class ImageTextPretrainDataset(BaseDataset):
         vl_text_mask_indices = torch.zeros(len(text_mask_indices)).scatter(0, vl_text_mask_ids, 1).bool()
 
         if image is not None:
-            image = Image.open(image).convert("RGB")
+            image = self.read_image(image)
             patch_image = self.transform(image)
         else:
             patch_image = torch.randn((self.patch_image_size, self.patch_image_size))

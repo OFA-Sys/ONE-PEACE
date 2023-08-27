@@ -1,0 +1,37 @@
+
+default_yaml: ../finetune_3B.yaml
+
+task:
+  _name: fsd50k
+  data: ../../dataset/fsd50K/fsd50K_dev.tsv
+  valid_data: ../../dataset/fsd50K/fsd50K_eval.tsv
+  selected_cols: uniq_id,audio,text,duration
+
+  max_duration: 15
+  head_type: audio
+  num_classes: 200
+
+criterion:
+  _name: classify_criterion
+  use_multi_label: true
+
+optimization:
+  max_epoch: 10
+  lr: [1e-4]
+  update_freq: [2]
+
+dataset:
+  batch_size: 8
+
+common:
+  layer_decay: 0.9
+
+checkpoint:
+  best_checkpoint_metric: accuracy
+
+model:
+  _name: one_peace_classify
+  head_scale_ratio: 2
+  use_pooler: false
+  pooler_dropout: 0.0
+  attn_pooling: true

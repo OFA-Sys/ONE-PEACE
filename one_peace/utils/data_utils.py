@@ -107,20 +107,6 @@ def get_whole_word_mask(bpe, dictionary):
     return None
 
 
-def audio_postprocess(feats, curr_sample_rate):
-    if feats.dim() == 2:
-        feats = feats.mean(-1)
-
-    if curr_sample_rate != 16000:
-        raise Exception(f"sample rate: {curr_sample_rate}, need 16000")
-
-    assert feats.dim() == 1, feats.dim()
-
-    with torch.no_grad():
-        feats = F.layer_norm(feats, feats.shape)
-    return feats
-
-
 def compute_block_mask_1d(
     shape: Tuple[int, int],
     mask_prob: float,

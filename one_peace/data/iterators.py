@@ -9,7 +9,7 @@ import torch
 from fairseq.data.iterators import CountingIterator, BufferedIterator
 from fairseq.data import data_utils
 
-from one_peace.utils.data_utils import new_islice
+from ..utils.data_utils import new_islice
 
 logger = logging.getLogger(__name__)
 

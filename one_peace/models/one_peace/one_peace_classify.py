@@ -4,7 +4,7 @@
 # found in the LICENSE file in the root directory.
 
 """
-One-Piece Classify
+ONE-PEACE Classify
 """
 from typing import Optional
 from dataclasses import dataclass, field
@@ -17,8 +17,8 @@ from fairseq.models import register_model
 from fairseq.distributed import fsdp_wrap
 from fairseq.modules.checkpoint_activations import checkpoint_wrapper
 
-from one_peace.models.unify_model_config import UnifyModelConfig
-from one_peace.models.one_peace.one_peace_base import ModelWrapper, OnePeaceClassifyHead, OnePeaceBaseModel, init_one_peace_params
+from ..unify_model_config import UnifyModelConfig
+from .one_peace_base import ModelWrapper, OnePeaceClassifyHead, OnePeaceBaseModel, init_one_peace_params
 
 logger = logging.getLogger(__name__)
 
@@ -37,28 +37,12 @@ class OnePeaceClassifyConfig(UnifyModelConfig):
         default=0.0,
         metadata={"help": ""}
     )
-    classify_with_gelu: bool = field(
-        default=False,
-        metadata={"help": ""}
-    )
-    backbone_lr_shrink: float = field(
-        default=1.0,
-        metadata={"help": ""}
-    )
-
-    mean_pooling: bool = field(
-        default=False,
-        metadata={"help": ""}
-    )
     attn_pooling: bool = field(
         default=False,
         metadata={"help": ""}
     )
 
     use_image_features: bool = False
-    freeze_text_ffn: bool = False
-    freeze_image_ffn: bool = False
-    freeze_feature_extractor: bool = False
     freeze_finetune_updates: int = 0
 
 
@@ -74,17 +58,14 @@ class OnePeaceClassifyModel(OnePeaceBaseModel):
         embed_dim = self.cfg.encoder.embed_dim
         self.head_type = head_type
         self.classify_head = OnePeaceClassifyHead(
-            mean_pooling=self.cfg.mean_pooling,
             attn_pooling=self.cfg.attn_pooling,
             use_pooler=self.cfg.use_pooler,
             pooler_dropout=self.cfg.pooler_dropout,
             input_dim=embed_dim,
             num_heads=self.cfg.encoder.attention_heads,
             head_scale_ratio=self.cfg.head_scale_ratio,
-            classify_with_gelu=self.cfg.classify_with_gelu,
             num_classes=num_classes,
-            use_two_images=use_two_images,
-            backbone_lr_shrink=self.cfg.backbone_lr_shrink
+            use_two_images=use_two_images
         )
 
         cfg.encoder.use_text_moe = False
@@ -97,9 +78,9 @@ class OnePeaceClassifyModel(OnePeaceBaseModel):
         if self.head_type in ('audio', 'al'):
             cfg.encoder.use_audio_moe = True
 
-        use_text_norm = self.head_type in ('text', 'vl', 'al') and (not self.cfg.mean_pooling or self.cfg.attn_pooling)
-        use_image_norm = self.head_type in ('image', 'vl') and (not self.cfg.mean_pooling or self.cfg.attn_pooling)
-        use_audio_norm = self.head_type in ('audio', 'al') and (not self.cfg.mean_pooling or self.cfg.attn_pooling)
+        use_text_norm = self.head_type in ('text', 'vl', 'al')
+        use_image_norm = self.head_type in ('image', 'vl')
+        use_audio_norm = self.head_type in ('audio', 'al')
         self.encoder_wrapper = ModelWrapper(
             cfg.encoder,
             src_dict,
@@ -121,15 +102,6 @@ class OnePeaceClassifyModel(OnePeaceBaseModel):
             else:
                 self.encoder_wrapper.fusion_model.layers[i] = fsdp_wrap(layer)
 
-        for layer in self.encoder_wrapper.fusion_model.layers:
-            if self.cfg.freeze_text_ffn:
-                layer.text_ffn.requires_grad_(False)
-            if self.cfg.freeze_image_ffn:
-                layer.image_ffn.requires_grad_(False)
-
-        if self.cfg.freeze_feature_extractor:
-            self.encoder_wrapper.audio_adapter.embed_audios[0].requires_grad_(False)
-
     def set_num_updates(self, num_updates):
         """Set the number of parameters updates."""
         super().set_num_updates(num_updates)
@@ -145,7 +117,7 @@ class OnePeaceClassifyModel(OnePeaceBaseModel):
     ):
         encoder_type = self.head_type
 
-        ft = self.cfg.freeze_finetune_updates <= self.num_updates
+        ft = self.cfg.freeze_finetune_updates <= self.num_updates if hasattr(self, 'num_updates') else True
 
         with torch.no_grad() if not ft else contextlib.ExitStack():
             enc_text_features, enc_image_features, enc_audio_features, \
@@ -216,6 +188,15 @@ class OnePeaceClassifyModel(OnePeaceBaseModel):
             if 'encoder_wrapper.fusion_model.audio_layer_norm.weight' in state_dict:
                 del state_dict['encoder_wrapper.fusion_model.audio_layer_norm.weight']
                 del state_dict['encoder_wrapper.fusion_model.audio_layer_norm.bias']
+        if 'text_proj.weight' in state_dict:
+            del state_dict['text_proj.weight']
+            del state_dict['text_proj.bias']
+        if 'image_proj.weight' in state_dict:
+            del state_dict['image_proj.weight']
+            del state_dict['image_proj.bias']
+        if 'audio_proj.weight' in state_dict:
+            del state_dict['audio_proj.weight']
+            del state_dict['audio_proj.bias']
 
         for param_name in list(state_dict.keys()):
             if self.head_type not in ('text', 'vl', 'al', 'val') and 'text_' in param_name:

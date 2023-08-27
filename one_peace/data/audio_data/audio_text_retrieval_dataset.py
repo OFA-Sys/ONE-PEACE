@@ -4,9 +4,8 @@
 # found in the LICENSE file in the root directory.
 
 import torch
-import soundfile as sf
 
-from one_peace.data.base_dataset import BaseDataset
+from ..base_dataset import BaseDataset
 
 
 class AudioTextRetrievalDataset(BaseDataset):
@@ -32,7 +31,7 @@ class AudioTextRetrievalDataset(BaseDataset):
             uniq_id = int(uniq_id) if isinstance(uniq_id, int) or uniq_id.isdigit() else uniq_id
 
         if audio is not None:
-            wav, curr_sample_rate = sf.read(audio, dtype="float32")
+            wav, curr_sample_rate = self.read_audio(audio)
             feats = torch.tensor(wav)
         else:
             feats = torch.randn(16000)

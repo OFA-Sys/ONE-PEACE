@@ -3,13 +3,11 @@
 # This source code is licensed under the Apache 2.0 license
 # found in the LICENSE file in the root directory.
 
-from PIL import Image
-
 import numpy as np
 import torch
 
-from one_peace.data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
-import one_peace.utils.transforms as T
+from ..base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
+from ...utils import transforms as T
 
 
 class RefCOCODataset(BaseDataset):
@@ -45,10 +43,9 @@ class RefCOCODataset(BaseDataset):
 
     def __getitem__(self, index):
         item = self.dataset[index]
-        uniq_id, image, text, region_coord = item
-        uniq_id = int(uniq_id)
+        image, text, region_coord = item
 
-        image = Image.open(image).convert("RGB")
+        image = self.read_image(image)
         w, h = image.size
         boxes_target = {"boxes": [], "labels": [], "area": [], "size": torch.tensor([h, w])}
         x0, y0, x1, y1 = region_coord.strip().split(',')
@@ -63,7 +60,7 @@ class RefCOCODataset(BaseDataset):
         src_item = self.encode_text(' {}'.format(text))
 
         example = {
-            "id": uniq_id,
+            "id": index,
             "source_text": src_item,
             "source_image": patch_image,
             "target": patch_boxes["boxes"],

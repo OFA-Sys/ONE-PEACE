@@ -171,15 +171,6 @@ class AdjustEncDecConfig(EncDecBaseConfig):
         metadata={"help": "layer scale init value"},
     )
 
-    use_geglu: bool = field(
-        default=True,
-        metadata={"help": ""},
-    )
-    share_ln: bool = field(
-        default=False,
-        metadata={"help": ""},
-    )
-
     activation_fn: ChoiceEnum(utils.get_available_activation_fns()) = field(
         default="gelu",
         metadata={"help": "activation function to use"},

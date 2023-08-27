@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-from one_peace.utils.data_utils import collate_tokens
+from ..utils.data_utils import collate_tokens
 
 
 def collate_fn(samples, pad_idx, pad_to_length=None):

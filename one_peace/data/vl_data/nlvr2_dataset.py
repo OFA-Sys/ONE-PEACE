@@ -3,15 +3,13 @@
 # This source code is licensed under the Apache 2.0 license
 # found in the LICENSE file in the root directory.
 
-from PIL import Image
-
 import torch
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
 
-from one_peace.data.base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
-from one_peace.utils.randaugment import RandomAugment
-import one_peace.utils.transforms as utils_transforms
+from ..base_dataset import BaseDataset, CLIP_DEFAULT_MEAN, CLIP_DEFAULT_STD
+from ...utils.randaugment import RandomAugment
+from ...utils import transforms as utils_transforms
 
 
 class Nlvr2Dataset(BaseDataset):
@@ -21,7 +19,7 @@ class Nlvr2Dataset(BaseDataset):
         dataset,
         bpe,
         dictionary,
-        max_src_length=40,
+        max_src_length=70,
         patch_image_size=384
     ):
         super().__init__(split, dataset, bpe, dictionary)
@@ -58,8 +56,8 @@ class Nlvr2Dataset(BaseDataset):
         else:
             raise NotImplementedError
 
-        image1 = Image.open(image1).convert("RGB")
-        image2 = Image.open(image2).convert("RGB")
+        image1 = self.read_image(image1)
+        image2 = self.read_image(image2)
         patch_image1 = self.transform(image1)
         patch_image2 = self.transform(image2)
 
