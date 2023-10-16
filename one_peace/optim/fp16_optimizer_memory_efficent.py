@@ -83,7 +83,7 @@ class _MemoryEfficientFP16OptimizerMixin(object):
             torch.is_tensor(self._multiply_factor)
             or self._multiply_factor != 1.0
         ):
-            if self.cfg.use_distributed_fused_adam:
+            if self.cfg.use_distributed_fused_adam and 'Distributed' in self.wrapped_optimizer.optimizer.__class__.__name__:
                 self.wrapped_optimizer.optimizer.unscale_grads(self._multiply_factor)
             else:
                 self.wrapped_optimizer.multiply_grads(self._multiply_factor)
