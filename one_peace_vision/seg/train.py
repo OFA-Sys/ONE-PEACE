@@ -144,7 +144,7 @@ def main():
                       'non-distributed training. Use the first GPU '
                       'in `gpu_ids` now.')
     if args.gpus is None and args.gpu_ids is None:
-        cfg.gpus_ids = [args.gpu_id]
+        cfg.gpu_ids = [args.gpu_id]
 
     cfg.auto_resume = args.auto_resume
 
