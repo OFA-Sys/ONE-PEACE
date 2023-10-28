@@ -3,8 +3,8 @@ default_yaml: ../finetune_3B.yaml
 
 task:
   _name: vggsound
-  data: ../../dataset/vggsound/vggsound_train_new.tsv
-  valid_data: ../../dataset/vggsound/vggsound_test_new.tsv
+  data: ../../dataset/vggsound/vggsound_train.tsv
+  valid_data: ../../dataset/vggsound/vggsound_test.tsv
   selected_cols: uniq_id,audio,text,duration
 
   max_duration: 15
