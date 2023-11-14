@@ -129,7 +129,7 @@ We also provide the vision-branch of ONE-PEACE, which can be used to perform vis
 
 
 # Requirements and Installation
-* Python >= 3.7
+* 3.6 <= Python <=3.10
 * Pytorch >= 1.10.0 (recommend 1.13.1)
 * CUDA Version >= 10.2 (recommend 11.6)
 * Install required packages:
