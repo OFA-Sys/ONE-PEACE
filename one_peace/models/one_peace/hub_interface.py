@@ -20,7 +20,8 @@ from ... import models
 
 _MODELS = {
     "ONE-PEACE": "http://one-peace-shanghai.oss-accelerate.aliyuncs.com/one-peace.pt",
-    "ONE-PEACE_Grounding": "https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_refcocog.pt"
+    "ONE-PEACE_Grounding": "https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_refcocog.pt",
+    "ONE-PEACE_VGGSound": "https://one-peace-shanghai.oss-accelerate.aliyuncs.com/one_peace_checkpoints/finetune_vggsound.pt"
 }
 
 def _download(url: str, root: str):
@@ -80,6 +81,7 @@ class OnePeaceHubInterface:
         self.model = model
         self.device = device
         self.dtype = dtype
+        self.model_type = cfg.model._name
 
         # for text
         self.dict = task.dict
@@ -202,13 +204,22 @@ class OnePeaceHubInterface:
             return src_images, src_tokens
 
     def extract_text_features(self, src_tokens):
-        return self.model(src_tokens=src_tokens, encoder_type="text")
+        if self.model_type == 'one_peace_classify':
+            self.model(src_tokens=src_tokens)
+        else:
+            return self.model(src_tokens=src_tokens, encoder_type="text")
 
     def extract_image_features(self, src_images):
-        return self.model(src_images=src_images, encoder_type="image")
+        if self.model_type == 'one_peace_classify':
+            return self.model(src_images=src_images)
+        else:
+            return self.model(src_images=src_images, encoder_type="image")
 
     def extract_audio_features(self, src_audios, audio_padding_masks):
-        return self.model(src_audios=src_audios, audio_padding_masks=audio_padding_masks, encoder_type="audio")
+        if self.model_type == 'one_peace_classify':
+            return self.model(src_audios=src_audios, audio_padding_masks=audio_padding_masks)
+        else:
+            return self.model(src_audios=src_audios, audio_padding_masks=audio_padding_masks, encoder_type="audio")
 
     def extract_vl_features(self, src_images, src_tokens):
         return self.model(src_tokens=src_tokens, src_images=src_images)
