@@ -180,9 +180,9 @@ class OnePeaceHubInterface:
                 start_idx = 0
                 end_idx = start_idx + curr_sample_rate * 15
                 feats = feats[start_idx:end_idx]
-            if feats.size(-1) < curr_sample_rate * 1:
-                feats = feats.repeat(math.ceil(curr_sample_rate * 1 / feats.size(-1)))
-                feats = feats[:curr_sample_rate * 1]
+            if feats.size(-1) < curr_sample_rate * 15:
+                feats = feats.repeat(math.ceil(curr_sample_rate * 15 / feats.size(-1)))
+                feats = feats[:curr_sample_rate * 15]
             T = self._get_mask_indices_dims(feats.size(-1), self.feature_encoder_spec)
             audio_padding_mask = torch.zeros(T + 1).bool()
             feats_list.append(feats)
