@@ -38,6 +38,7 @@ model:
   use_pooler: false
   pooler_dropout: 0.0
   attn_pooling: true
+  use_image_features: true
 
   encoder:
     drop_path_rate: 0.4
