@@ -15,4 +15,5 @@ torchrun --nproc_per_node=${GPUS_PER_NODE} --master_port=${MASTER_PORT} ../../tr
     --config-dir=${config_dir} \
     --config-name=${config_name} \
     task.data=${data} \
-    task.valid_data=${valid_data}
+    task.valid_data=${valid_data} \
+    model.use_image_features=false
