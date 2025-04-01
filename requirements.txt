@@ -4,7 +4,7 @@ requests==2.28.1
 tensorboardX==2.6
 einops==0.6.1
 soundfile==0.12.1
-omegaconf==2.0.6
+omegaconf==2.1.1
 pillow==8.4.0
 timm==0.6.11
 iopath==0.1.10
